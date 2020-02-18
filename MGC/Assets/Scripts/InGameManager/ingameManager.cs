@@ -11,6 +11,10 @@ public class ingameManager : management {
     public override void init()
     {
         // 진우님이 만든 인게임 매니저 set
+        if (m_bInit == true) return;
+        m_bInit = true;
+
+        m_eventBuffer = new Queue<C_BasePacket>();
     }
 
     public override void release()
@@ -21,6 +25,7 @@ public class ingameManager : management {
     {
         // 진우 님이 만든 인 게임 매니저에게 대 분류 타입부분만 떼고 보내기
         // use-> byte[] realData = getData(curEvent);
+        Debug.Log(curEvent.m_basicType.ToString());
         if (curEvent.m_basicType != BasePacketType.basePacketTypeGame) return;
         C_InGamePacket data = (C_InGamePacket)curEvent;
         m_ingameMGR.Event(data.m_gameData);

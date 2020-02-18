@@ -23,9 +23,8 @@ public class IngameManager : MonoBehaviour
     private GameData.SendGameReadyPacket m_sendGameReadyPacket;
     private byte[] m_baSendGameReadyPacket;
 
-    public GameObject m_goButtonAllReady, m_goNickNameInputField, m_goCanvas, m_goMainMenu, m_goButtonTwenty, m_goButtonCatch, m_goRadioGroup;
+    public GameObject m_goButtonAllReady, m_goNickNameInputField, m_goCanvas, m_goButtonTwenty, m_goButtonCatch, m_goRadioGroup;
     public GameObject m_goPrefabGameTwenty, m_goPrefabGameRelay, m_goPrefabGameBan, m_goPrefabGameCatch;
-    public Text m_textNickName;
 
     //1// 싱글톤
     private static IngameManager m_instance;
@@ -61,7 +60,6 @@ public class IngameManager : MonoBehaviour
     private void Awake()
     {
         // 스크린 사이즈 고정(임시)
-        //Screen.SetResolution(1024, 768, false);
 
         var objs = FindObjectsOfType<IngameManager>();
 
@@ -71,82 +69,34 @@ public class IngameManager : MonoBehaviour
             return;
         }
 
-        //1// 소켓 생성 및 연결
-        //m_client = new Client();
-        //m_client.Init();
-        //m_client.Connect(IP, PORT);
-        //1//
-
         m_eventBuffer = EventBuffer.m_Instance;
-
-        // event queue 검사 코루틴
-        //StartCoroutine(CheckEventQueue());
-
-        // errorMsg queue 검사 코루틴
-        //StartCoroutine(CheckErrorMsgQueue());
+        
     }
 
-    private IEnumerator CheckEventQueue()
-    {   
-        while (true)
-        {
-            // 이벤트 큐에 있는 데이터를 가져온다.
-            byte[] data = m_eventBuffer.GetData();
+    // GameType, StructType 4byte(int)로 판별했을 때 사용
+    //private int CheckPacketType(byte[] _baBuffer, int _iStartIdx)
+    //{
+    //    if(_baBuffer.Length < 4)
+    //    {
+    //        Debug.Log("버퍼 크기가 4보다 작음");
+    //        return -1;
+    //    }
 
-            //1// 가져온 데이터의 길이가 1이 아니라면 Event 호출하여 인게임 처리
-            if (data.Length != 1)
-            {
-                Event(data);
-            }
-            //1//
+    //    byte[] bytes = new byte[4];
+    //    int k = 0;
 
-            // 0.01초 간격
-            yield return new WaitForSeconds(0.01f);
-        }
-    }
+    //    for(int i = _iStartIdx; i < _iStartIdx + 4; ++i)
+    //    {
+    //        bytes[k] = _baBuffer[i];
 
-    private IEnumerator CheckErrorMsgQueue()
-    {
-        while (true)
-        {
-            // 에러메세지 큐에 있는 데이터를 가져온다.
-            string strErrorMsg = m_eventBuffer.GetErrorMsg();
+    //        ++k;
+    //    }
 
-            //1// 가져온 메세지가 ""이 아니면 출력
-            if (strErrorMsg != "")
-            {
-                Debug.Log(strErrorMsg);
-            }
-            //1//
+    //    if (!BitConverter.IsLittleEndian)
+    //        Array.Reverse(bytes);
 
-            // 1초 간격
-            yield return new WaitForSeconds(0.1f);
-        }
-    }
-
-    private int CheckPacketType(byte[] _baBuffer, int _iStartIdx)
-    {
-        if(_baBuffer.Length < 4)
-        {
-            Debug.Log("버퍼 크기가 4보다 작음");
-            return -1;
-        }
-
-        byte[] bytes = new byte[4];
-        int k = 0;
-
-        for(int i = _iStartIdx; i < _iStartIdx + 4; ++i)
-        {
-            bytes[k] = _baBuffer[i];
-
-            ++k;
-        }
-
-        if (!BitConverter.IsLittleEndian)
-            Array.Reverse(bytes);
-
-        return BitConverter.ToInt32(bytes, 0);
-    }
+    //    return BitConverter.ToInt32(bytes, 0);
+    //}
 
     public Client GetClient()
     {
@@ -155,13 +105,14 @@ public class IngameManager : MonoBehaviour
 
     public void Event(byte[] _baBuffer)
     {
-        //1// 첫 4바이트를 이용해 game type 판별
+        //1// 첫 1바이트를 이용해 game type 판별
         int iGameTypeStartIdx = 0;
-        GameData.EnumGameType eGameType = (GameData.EnumGameType)CheckPacketType(_baBuffer, iGameTypeStartIdx);
+        //GameData.EnumGameType eGameType = (GameData.EnumGameType)CheckPacketType(_baBuffer, iGameTypeStartIdx);
+        GameData.EnumGameType eGameType = (GameData.EnumGameType)_baBuffer[iGameTypeStartIdx];
         //1//
 
-        //2// 다음 4바이트를 이용해 struct type 판별
-        int iStructTypeStartIdx = 4;
+        //2// 다음 1바이트를 이용해 struct type 판별
+        int iStructTypeStartIdx = 1;
         GameData.EnumGameTwentyStructType eGameTwentyStructType = new GameData.EnumGameTwentyStructType();
         GameData.EnumGameRelayStructType eGameRelayStructType = new GameData.EnumGameRelayStructType();
         GameData.EnumGameBanStructType eGameBanStructType = new GameData.EnumGameBanStructType();
@@ -170,19 +121,23 @@ public class IngameManager : MonoBehaviour
         switch (eGameType)
         {
             case GameData.EnumGameType.TWENTY:
-                eGameTwentyStructType = (GameData.EnumGameTwentyStructType)CheckPacketType(_baBuffer, iStructTypeStartIdx);
+                //eGameTwentyStructType = (GameData.EnumGameTwentyStructType)CheckPacketType(_baBuffer, iStructTypeStartIdx);
+                eGameTwentyStructType = (GameData.EnumGameTwentyStructType)_baBuffer[iStructTypeStartIdx];
                 break;
 
             case GameData.EnumGameType.RELAY:
-                eGameRelayStructType = (GameData.EnumGameRelayStructType)CheckPacketType(_baBuffer, iStructTypeStartIdx);
+                //eGameRelayStructType = (GameData.EnumGameRelayStructType)CheckPacketType(_baBuffer, iStructTypeStartIdx);
+                eGameRelayStructType = (GameData.EnumGameRelayStructType)_baBuffer[iStructTypeStartIdx];
                 break;
 
             case GameData.EnumGameType.BAN:
-                eGameBanStructType = (GameData.EnumGameBanStructType)CheckPacketType(_baBuffer, iStructTypeStartIdx);
+                //eGameBanStructType = (GameData.EnumGameBanStructType)CheckPacketType(_baBuffer, iStructTypeStartIdx);
+                eGameBanStructType = (GameData.EnumGameBanStructType)_baBuffer[iStructTypeStartIdx];
                 break;
 
             case GameData.EnumGameType.CATCH:
-                eGameCatchStructType = (GameData.EnumGameCatchStructType)CheckPacketType(_baBuffer, iStructTypeStartIdx);
+                //eGameCatchStructType = (GameData.EnumGameCatchStructType)CheckPacketType(_baBuffer, iStructTypeStartIdx);
+                eGameCatchStructType = (GameData.EnumGameCatchStructType)_baBuffer[iStructTypeStartIdx];
                 break;
 
             default:
@@ -196,11 +151,6 @@ public class IngameManager : MonoBehaviour
                 {
                     switch (eGameTwentyStructType)
                     {
-                        case GameData.EnumGameTwentyStructType.RECEIVE_ROOM_MASTER_PACKET:
-                            Debug.Log("Receive Game Twenty Room Master Packet");
-                            m_goButtonAllReady.SetActive(true);
-                            break;
-
                         case GameData.EnumGameTwentyStructType.RECEIVE_PLAYER_POSITION_PACKET:
                             Debug.Log("Receive Game Twenty Player Position Packet");
                             LoadGameTwenty(_baBuffer);
@@ -258,11 +208,6 @@ public class IngameManager : MonoBehaviour
                 {
                     switch (eGameCatchStructType)
                     {
-                        case GameData.EnumGameCatchStructType.RECEIVE_ROOM_MASTER_PACKET:
-                            Debug.Log("Receive Game Catch Room Master Packet");
-                            m_goButtonAllReady.SetActive(true);
-                            break;
-
                         case GameData.EnumGameCatchStructType.RECEIVE_PLAYER_POSITION_PACKET:
                             Debug.Log("Receive Game Catch Player Position Packet");
                             LoadGameCatch(_baBuffer);
@@ -274,6 +219,7 @@ public class IngameManager : MonoBehaviour
                         case GameData.EnumGameCatchStructType.RECEIVE_SELECT_END_PACKET:
                         case GameData.EnumGameCatchStructType.RECEIVE_INGAME_TIME_PACKET:
                         case GameData.EnumGameCatchStructType.RECEIVE_POINT_PACKET:
+                        case GameData.EnumGameCatchStructType.RECEIVE_CHAT_PACKET:
                             m_miniGameCatch.Event(_baBuffer, eGameCatchStructType);
                             break;
 
@@ -293,31 +239,14 @@ public class IngameManager : MonoBehaviour
         Debug.Log(_strErrorMsg);
     }
 
-    public void SendAllReady()
+    
+    public void SendPacket(byte[] packet)
     {
-        GameData.SendGameAllReadyPacket allReady = new GameData.SendGameAllReadyPacket();
-
-        if (m_sendGameStartPacket.iGameType.Equals((int)GameData.EnumGameType.TWENTY))
-        {
-            allReady.iGameType = (int)GameData.EnumGameType.TWENTY;
-            allReady.iStructType = (int)GameData.EnumGameTwentyStructType.SEND_GAME_ALL_READY_PACKET;
-        }
-        else if (m_sendGameStartPacket.iGameType.Equals((int)GameData.EnumGameType.CATCH))
-        {
-            allReady.iGameType = (int)GameData.EnumGameType.CATCH;
-            allReady.iStructType = (int)GameData.EnumGameCatchStructType.SEND_GAME_ALL_READY_PACKET;
-        }
-
-        byte[] packet = Serializer.StructureToByte(allReady);
-
-        m_client.SendPacket(packet);
-
-        Debug.Log("Send All Ready Packet");
-
-        m_goButtonAllReady.SetActive(false);
+        GameManager.m_Instance.makePacket(packet);
     }
 
-    Color SetColor(int _iColorData)
+
+    private Color SetColor(int _iColorData)
     {
         Color color = new Color();
 
@@ -344,45 +273,23 @@ public class IngameManager : MonoBehaviour
                 break;
 
             case (int)GameData.EnumPlayerColor.PURPLE:
-                color = new Color(98 / 255, 27 / 255, 155 / 255);
+
+                float fR = (float)98 / 255;
+                float fG = (float)27 / 255;
+                float fB = (float)155 / 255;
+
+                color = new Color(fR, fG, fB);
                 break;
         }
 
         return color;
     }
 
-    public void SendGameTwentyReady()
-    {
-        m_strNickname = m_textNickName.text;
-
-        //1// 메인 메뉴에서 스무고개 버튼 누르면 서버에 플레이어 정보 세팅
-        m_sendGameStartPacket.iGameType = (int)GameData.EnumGameType.TWENTY;
-        m_sendGameStartPacket.iStructType = (int)GameData.EnumGameTwentyStructType.SEND_GAME_START_PACKET;
-        m_sendGameStartPacket.iRoomNum = 1;
-        m_sendGameStartPacket.iPlayerColor = m_iPlayerColor;
-        m_sendGameStartPacket.strPlayerID = m_strNickname;
-        //1//
-
-        //2// 서버에 보낼 패킷 Serializing 후 send
-        byte[] packet = Serializer.StructureToByte(m_sendGameStartPacket);
-
-        m_client.SendPacket(packet);
-        //2//
-
-        Debug.Log("Send Game Twenty Ready Packet");
-                
-        m_goNickNameInputField.SetActive(false);
-        m_goRadioGroup.SetActive(false);
-        m_goButtonTwenty.SetActive(false);
-    }
-
     public void SendGameCatchReady()
     {
-        m_strNickname = m_textNickName.text;
 
         //1// 메인 메뉴에서 스무고개 버튼 누르면 서버에 플레이어 정보 세팅
-        m_sendGameStartPacket.iGameType = (int)GameData.EnumGameType.CATCH;
-        m_sendGameStartPacket.iStructType = (int)GameData.EnumGameCatchStructType.SEND_GAME_START_PACKET;
+        m_sendGameStartPacket.byteGameType = (byte)GameData.EnumGameType.CATCH;
         m_sendGameStartPacket.iRoomNum = 1;
         m_sendGameStartPacket.iPlayerColor = m_iPlayerColor;
         m_sendGameStartPacket.strPlayerID = m_strNickname;
@@ -391,7 +298,7 @@ public class IngameManager : MonoBehaviour
         //2// 서버에 보낼 패킷 Serializing 후 send
         byte[] packet = Serializer.StructureToByte(m_sendGameStartPacket);
 
-        m_client.SendPacket(packet);
+        SendPacket(packet);
         //2//
 
         Debug.Log("Send Game Catch Ready Packet");
@@ -409,18 +316,18 @@ public class IngameManager : MonoBehaviour
     private void SendInGameReady(GameData.EnumGameType _eGameType)
     {
         //1// 게임 준비 완료 패킷 세팅
-        m_sendGameReadyPacket.iGameType = (int)_eGameType;
+        m_sendGameReadyPacket.byteGameType = (byte)_eGameType;
 
         if(_eGameType.Equals(GameData.EnumGameType.TWENTY))
-            m_sendGameReadyPacket.iStructType = (int)GameData.EnumGameTwentyStructType.SEND_GAME_READY_PACKET;
+            m_sendGameReadyPacket.byteStructType = (byte)GameData.EnumGameTwentyStructType.SEND_GAME_READY_PACKET;
         else if(_eGameType.Equals(GameData.EnumGameType.CATCH))
-            m_sendGameReadyPacket.iStructType = (int)GameData.EnumGameCatchStructType.SEND_GAME_READY_PACKET;
+            m_sendGameReadyPacket.byteStructType = (byte)GameData.EnumGameCatchStructType.SEND_GAME_READY_PACKET;
         //1//
 
         //2// 서버에 보낼 패킷 Serializing 후 send
         m_baSendGameReadyPacket = Serializer.StructureToByte(m_sendGameReadyPacket);
 
-        m_client.SendPacket(m_baSendGameReadyPacket);
+        SendPacket(m_baSendGameReadyPacket);
         //2//
 
         Debug.Log("Send Ingame Ready Packet");
@@ -428,6 +335,7 @@ public class IngameManager : MonoBehaviour
 
     private void LoadGameTwenty(byte[] _baBuffer)
     {
+        m_strNickname = GameManager.m_Instance.getUserNickName();
         //1// 서버에서 받은 패킷 deserializing - 플레이어 위치 순서
         GameData.ReceivePlayerPositionTwentyPacket playerPositionPacket = new GameData.ReceivePlayerPositionTwentyPacket();
         playerPositionPacket = Serializer.ByteToStructure<GameData.ReceivePlayerPositionTwentyPacket>(_baBuffer);
@@ -461,11 +369,6 @@ public class IngameManager : MonoBehaviour
         m_miniGameTwenty.m_textNickname4.text = playerPositionPacket.strPlayersID_Position4;
         m_miniGameTwenty.m_textNickname5.text = playerPositionPacket.strPlayersID_Position5;
 
-        m_miniGameTwenty.m_imgTempCharacter1.color = SetColor(playerPositionPacket.iPlayersColor_Position1);
-        m_miniGameTwenty.m_imgTempCharacter2.color = SetColor(playerPositionPacket.iPlayersColor_Position2);
-        m_miniGameTwenty.m_imgTempCharacter3.color = SetColor(playerPositionPacket.iPlayersColor_Position3);
-        m_miniGameTwenty.m_imgTempCharacter4.color = SetColor(playerPositionPacket.iPlayersColor_Position4);
-        m_miniGameTwenty.m_imgTempCharacter5.color = SetColor(playerPositionPacket.iPlayersColor_Position5);
         //2//
 
         // 출제자 표시 텍스트, 질문자 표시 텍스트 위치 세팅
@@ -492,7 +395,6 @@ public class IngameManager : MonoBehaviour
         //3//
 
         //4// 기본 세팅 완료되면 메인메뉴 닫고, GameTwenty 활성화
-        m_goMainMenu.SetActive(false);
         m_goGameTwenty.SetActive(true);
         //4//
         
@@ -562,7 +464,6 @@ public class IngameManager : MonoBehaviour
         //3//
 
         //4// 기본 세팅 완료되면 메인메뉴 닫고, GameCatch 활성화
-        m_goMainMenu.SetActive(false);
         m_goGameCatch.SetActive(true);
         //4//
 
@@ -577,19 +478,16 @@ public class IngameManager : MonoBehaviour
 
     public void LoadGameRelay()
     {
-        m_goMainMenu.SetActive(false);
         m_goGameRelay = Instantiate(m_goPrefabGameRelay, m_goCanvas.transform);
     }
 
     public void LoadGameBan()
     {
-        m_goMainMenu.SetActive(false);
         m_goGameBan = Instantiate(m_goPrefabGameBan, m_goCanvas.transform);
     }
 
     public void LoadGameCatch()
     {
-        m_goMainMenu.SetActive(false);
         m_goGameCatch = Instantiate(m_goPrefabGameCatch, m_goCanvas.transform);
     }
 
@@ -598,13 +496,12 @@ public class IngameManager : MonoBehaviour
         if (_eGameType.Equals(GameData.EnumGameType.TWENTY))
         {
             Destroy(m_goGameTwenty.gameObject);
-            m_goMainMenu.SetActive(true);
         }
         else if (_eGameType.Equals(GameData.EnumGameType.CATCH))
         {
             Destroy(m_goGameCatch.gameObject);
-            m_goMainMenu.SetActive(true);
         }
+        GameManager.m_Instance.endGame();
     }
 
     public void SetPlyaerColorRed()

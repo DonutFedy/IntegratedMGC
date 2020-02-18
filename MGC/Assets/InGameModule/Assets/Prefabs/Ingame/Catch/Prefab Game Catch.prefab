@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4933595141412989861}
   - component: {fileID: 2620387107736776897}
   - component: {fileID: 1374206699096536818}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Nickname Text1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 7195376842527543583}
   - component: {fileID: 1603255783739098381}
   - component: {fileID: 3050276008235784290}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -161,7 +161,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1511682116508727526}
   - component: {fileID: 4583559061568380847}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Radio Answer5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -247,6 +247,79 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   m_IsOn: 0
+--- !u!1 &256094587670585689
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3681904607919601022}
+  - component: {fileID: 6209978060691861009}
+  - component: {fileID: 570257180516524132}
+  m_Layer: 8
+  m_Name: Ingame Chat Bubble Border6
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &3681904607919601022
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 256094587670585689}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6721668296010639486}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 325, y: -230}
+  m_SizeDelta: {x: 150, y: 36}
+  m_Pivot: {x: 1, y: 0.5}
+--- !u!222 &6209978060691861009
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 256094587670585689}
+  m_CullTransparentMesh: 0
+--- !u!114 &570257180516524132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 256094587670585689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0.49019608, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &410188997277523702
 GameObject:
   m_ObjectHideFlags: 0
@@ -257,7 +330,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5300485209046614967}
   - component: {fileID: 7571926781157062448}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Radio Eraser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -329,7 +402,18 @@ MonoBehaviour:
   m_Group: {fileID: 6885420613112029691}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6533426621588173272}
+        m_MethodName: SetLineColorWhite
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 0
 --- !u!1 &450053928903083579
 GameObject:
@@ -488,7 +572,7 @@ GameObject:
   - component: {fileID: 302370229690403040}
   - component: {fileID: 7769874993025403721}
   - component: {fileID: 3008204565970340162}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -565,7 +649,7 @@ GameObject:
   - component: {fileID: 7705331810479676561}
   - component: {fileID: 5579072945356988750}
   - component: {fileID: 5170089742577375560}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Checkmark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -833,7 +917,7 @@ GameObject:
   - component: {fileID: 6649219972515917657}
   - component: {fileID: 5527387540903325630}
   - component: {fileID: 3884476085414431528}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -981,7 +1065,7 @@ GameObject:
   - component: {fileID: 3150333815741997961}
   - component: {fileID: 9141086738284782710}
   - component: {fileID: 1329327115921334676}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Nickname Text2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1195,6 +1279,39 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &983191684404652127
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2034228884365220921}
+  m_Layer: 0
+  m_Name: Chat Bubble5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &2034228884365220921
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 983191684404652127}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 5813128944327631745}
+  - {fileID: 7461931486787153148}
+  - {fileID: 2970090089670382164}
+  m_Father: {fileID: 2046839201760793264}
+  m_RootOrder: 24
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1052605397751508080
 GameObject:
   m_ObjectHideFlags: 0
@@ -1206,8 +1323,8 @@ GameObject:
   - component: {fileID: 4382113392404634550}
   - component: {fileID: 7301203185921652203}
   - component: {fileID: 470530602957507930}
-  m_Layer: 5
-  m_Name: Ingame Chat Bubble Text
+  m_Layer: 8
+  m_Name: Ingame Chat Bubble Text1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1224,14 +1341,14 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 3365752890834107581}
-  m_RootOrder: 1
+  m_Father: {fileID: 8552980215915907155}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 140, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -317.5, y: 190}
+  m_SizeDelta: {x: 135, y: 21}
+  m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &7301203185921652203
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1264,14 +1381,14 @@ MonoBehaviour:
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
-    m_MaxSize: 50
+    m_MaxSize: 20
     m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uAC00\uB098\uB2E4\uB77C\uB9C8\uBC14\uC0AC\uC544"
+  m_Text: 
 --- !u!1 &1091197557730170367
 GameObject:
   m_ObjectHideFlags: 0
@@ -1284,7 +1401,7 @@ GameObject:
   - component: {fileID: 1261502386387486302}
   - component: {fileID: 8747521020782310854}
   - component: {fileID: 4282444701788565505}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Radio Group Answers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1310,7 +1427,7 @@ RectTransform:
   - {fileID: 4004783526430488650}
   - {fileID: 1511682116508727526}
   m_Father: {fileID: 2046839201760793264}
-  m_RootOrder: 24
+  m_RootOrder: 29
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1495,7 +1612,7 @@ GameObject:
   - component: {fileID: 1768597331008215071}
   - component: {fileID: 5775966573866205435}
   - component: {fileID: 6851425043059093275}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1646,8 +1763,8 @@ GameObject:
   - component: {fileID: 4359576621905320559}
   - component: {fileID: 2054332473970126155}
   - component: {fileID: 1092428915265959207}
-  m_Layer: 5
-  m_Name: Ingame Chat Bubble Img White
+  m_Layer: 8
+  m_Name: Ingame Chat Bubble Field1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1664,14 +1781,14 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 3365752890834107581}
-  m_RootOrder: 0
+  m_Father: {fileID: 8552980215915907155}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 140, y: 25}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -320, y: 190}
+  m_SizeDelta: {x: 140, y: 26}
+  m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &2054332473970126155
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1719,7 +1836,7 @@ GameObject:
   - component: {fileID: 7841723695353028225}
   - component: {fileID: 9127651207198531550}
   - component: {fileID: 7579118851665364994}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: PlayerExitPopup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1741,7 +1858,7 @@ RectTransform:
   - {fileID: 7352272217987079843}
   - {fileID: 800119158053833440}
   m_Father: {fileID: 2046839201760793264}
-  m_RootOrder: 26
+  m_RootOrder: 31
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1795,7 +1912,7 @@ GameObject:
   - component: {fileID: 8216443607326523419}
   - component: {fileID: 8940463449379381591}
   - component: {fileID: 4323935075781099849}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: PopUp Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1861,6 +1978,85 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "\uC7A0\uC2DC \uD6C4 \uAC8C\uC784\uC774 \uC2DC\uC791\uB429\uB2C8\uB2E4."
+--- !u!1 &1351613703390488854
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8098732609784400605}
+  - component: {fileID: 5504041522399437657}
+  - component: {fileID: 646993350749938278}
+  m_Layer: 5
+  m_Name: ReceivePointCount
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &8098732609784400605
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1351613703390488854}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2046839201760793264}
+  m_RootOrder: 33
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 400, y: -250}
+  m_SizeDelta: {x: 160, y: 150}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &5504041522399437657
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1351613703390488854}
+  m_CullTransparentMesh: 0
+--- !u!114 &646993350749938278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1351613703390488854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 50
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 3
+    m_MaxSize: 50
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'recv
+
+    0'
 --- !u!1 &1431939540672953253
 GameObject:
   m_ObjectHideFlags: 0
@@ -1872,7 +2068,7 @@ GameObject:
   - component: {fileID: 6573348272510381300}
   - component: {fileID: 6230020077363502008}
   - component: {fileID: 300943333299632416}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Answer4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2025,7 +2221,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2423203058038305778}
   - component: {fileID: 7539472862778104730}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Radio Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2097,7 +2293,18 @@ MonoBehaviour:
   m_Group: {fileID: 6885420613112029691}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6533426621588173272}
+        m_MethodName: SetLineColorBlue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 0
 --- !u!1 &1767447501537850018
 GameObject:
@@ -2322,7 +2529,7 @@ GameObject:
   - component: {fileID: 5579160049857531307}
   - component: {fileID: 4882108827411602564}
   - component: {fileID: 623678937776072282}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2396,7 +2603,7 @@ GameObject:
   - component: {fileID: 2515226914804908916}
   - component: {fileID: 3215853794638170906}
   - component: {fileID: 8824370255507452071}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2469,7 +2676,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8391497136031326438}
   - component: {fileID: 3697360286032250931}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Radio Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2541,7 +2748,18 @@ MonoBehaviour:
   m_Group: {fileID: 6885420613112029691}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6533426621588173272}
+        m_MethodName: SetLineColorRed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 0
 --- !u!1 &2044927348959950928
 GameObject:
@@ -2554,7 +2772,7 @@ GameObject:
   - component: {fileID: 3567248550418297347}
   - component: {fileID: 402015577018755155}
   - component: {fileID: 3753358994405561653}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Text Timer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2632,13 +2850,13 @@ GameObject:
   - component: {fileID: 6885420613112029691}
   - component: {fileID: 8219205949844962783}
   - component: {fileID: 1195896063454886131}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Radio Group Color
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3948854678710326298
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2727,7 +2945,7 @@ GameObject:
   - component: {fileID: 3412233498486319129}
   - component: {fileID: 4666760963780960803}
   - component: {fileID: 247941695373679167}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Nicname Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2958,7 +3176,7 @@ GameObject:
   - component: {fileID: 702113332967168526}
   - component: {fileID: 8507210095833528410}
   - component: {fileID: 3837204637567390533}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Checkmark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3020,6 +3238,79 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &2292482279394096053
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5083991695240206221}
+  - component: {fileID: 2332015660521504838}
+  - component: {fileID: 7606753643569845474}
+  m_Layer: 8
+  m_Name: Ingame Chat Bubble Field4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5083991695240206221
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2292482279394096053}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1227623743506649438}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 320, y: -20}
+  m_SizeDelta: {x: 140, y: 26}
+  m_Pivot: {x: 1, y: 0.5}
+--- !u!222 &2332015660521504838
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2292482279394096053}
+  m_CullTransparentMesh: 0
+--- !u!114 &7606753643569845474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2292482279394096053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &2330547128490307190
 GameObject:
   m_ObjectHideFlags: 0
@@ -3031,7 +3322,7 @@ GameObject:
   - component: {fileID: 7831760571989386147}
   - component: {fileID: 8448145243832736921}
   - component: {fileID: 2402389368494105748}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3336,7 +3627,7 @@ GameObject:
   - component: {fileID: 7207193689442333336}
   - component: {fileID: 3277348728321383217}
   - component: {fileID: 2893159296250202083}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Checkmark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3398,6 +3689,156 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &2457504617658741370
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 570035162667096883}
+  - component: {fileID: 2329706196379077795}
+  - component: {fileID: 8380001070894529450}
+  m_Layer: 8
+  m_Name: Ingame Chat Bubble Text2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &570035162667096883
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2457504617658741370}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 9019976947404687937}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 317.5, y: 190}
+  m_SizeDelta: {x: 135, y: 21}
+  m_Pivot: {x: 1, y: 0.5}
+--- !u!222 &2329706196379077795
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2457504617658741370}
+  m_CullTransparentMesh: 0
+--- !u!114 &8380001070894529450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2457504617658741370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: c4a80f119955216499efedca61de19dd, type: 3}
+    m_FontSize: 20
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 1
+    m_MaxSize: 20
+    m_Alignment: 3
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 
+--- !u!1 &2487204764460405662
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5319031863107207732}
+  - component: {fileID: 5613015889605297335}
+  - component: {fileID: 2659582517981689470}
+  m_Layer: 8
+  m_Name: Ingame Chat Bubble Field3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5319031863107207732
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2487204764460405662}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7252726085283055457}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -320, y: -20}
+  m_SizeDelta: {x: 140, y: 26}
+  m_Pivot: {x: 0, y: 0.5}
+--- !u!222 &5613015889605297335
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2487204764460405662}
+  m_CullTransparentMesh: 0
+--- !u!114 &2659582517981689470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2487204764460405662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &2625734250680775459
 GameObject:
   m_ObjectHideFlags: 0
@@ -3409,7 +3850,7 @@ GameObject:
   - component: {fileID: 1690857575445981999}
   - component: {fileID: 4120988172279816838}
   - component: {fileID: 764058496231672904}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Time Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3486,7 +3927,7 @@ GameObject:
   - component: {fileID: 2877042557180120606}
   - component: {fileID: 4047791166422716414}
   - component: {fileID: 7656259024807496620}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Nickname Text3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3563,7 +4004,7 @@ GameObject:
   - component: {fileID: 312535995433591361}
   - component: {fileID: 1019977200623918666}
   - component: {fileID: 1477738277585950297}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Score Text4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3713,7 +4154,7 @@ GameObject:
   - component: {fileID: 1907325507517519264}
   - component: {fileID: 6792579605701022759}
   - component: {fileID: 8183019336392459711}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Checkmark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3786,7 +4227,7 @@ GameObject:
   - component: {fileID: 1972396731578150658}
   - component: {fileID: 7166704332763980181}
   - component: {fileID: 5619247950242660863}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Score Text1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3862,7 +4303,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4444254071484549676}
   - component: {fileID: 9160262066200308602}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Radio White
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3934,7 +4375,18 @@ MonoBehaviour:
   m_Group: {fileID: 6885420613112029691}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6533426621588173272}
+        m_MethodName: SetLineColorWhite
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 0
 --- !u!1 &2927303276694198871
 GameObject:
@@ -4009,6 +4461,39 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &2930816930246571398
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6721668296010639486}
+  m_Layer: 0
+  m_Name: Chat Bubble6
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &6721668296010639486
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2930816930246571398}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 3681904607919601022}
+  - {fileID: 8283525571291659812}
+  - {fileID: 6302085785231850912}
+  m_Father: {fileID: 2046839201760793264}
+  m_RootOrder: 25
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2971520598010064119
 GameObject:
   m_ObjectHideFlags: 0
@@ -4094,7 +4579,7 @@ GameObject:
   - component: {fileID: 5308641729681290628}
   - component: {fileID: 4910819029087877956}
   - component: {fileID: 4624022294725318035}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Answer3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4171,7 +4656,7 @@ GameObject:
   - component: {fileID: 6569498447004452878}
   - component: {fileID: 2588521405623149561}
   - component: {fileID: 8999673369978669717}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Checkmark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4233,6 +4718,83 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &3047968267846453124
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6302085785231850912}
+  - component: {fileID: 8231796866672493766}
+  - component: {fileID: 2176339542039700051}
+  m_Layer: 8
+  m_Name: Ingame Chat Bubble Text6
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &6302085785231850912
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3047968267846453124}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6721668296010639486}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 317.5, y: -230}
+  m_SizeDelta: {x: 135, y: 21}
+  m_Pivot: {x: 1, y: 0.5}
+--- !u!222 &8231796866672493766
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3047968267846453124}
+  m_CullTransparentMesh: 0
+--- !u!114 &2176339542039700051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3047968267846453124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: c4a80f119955216499efedca61de19dd, type: 3}
+    m_FontSize: 20
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 1
+    m_MaxSize: 20
+    m_Alignment: 3
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 
 --- !u!1 &3091384729957063539
 GameObject:
   m_ObjectHideFlags: 0
@@ -4243,7 +4805,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9057427518135932083}
   - component: {fileID: 8781193126985940756}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Radio Answer2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4420,7 +4982,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2422591551882152213}
   - component: {fileID: 5035359913336459940}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Radio Answer1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4517,7 +5079,7 @@ GameObject:
   - component: {fileID: 8408317551827543503}
   - component: {fileID: 2223297593730660665}
   - component: {fileID: 4490038474199083688}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Nicname Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4584,6 +5146,85 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "\uCD9C\uC81C\uC790 '\uAC00\uB098\uB2E4\uB77C\uB9C8\uBC14\uC0AC\uC544\uC790\uCC28'\uB2D8\uC774
     \uB098\uAC14\uC2B5\uB2C8\uB2E4."
+--- !u!1 &3463685905233624445
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8431124802635489373}
+  - component: {fileID: 4424669872355366602}
+  - component: {fileID: 2961478153812854214}
+  m_Layer: 5
+  m_Name: SendPointCount
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &8431124802635489373
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3463685905233624445}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2046839201760793264}
+  m_RootOrder: 32
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -400, y: -250}
+  m_SizeDelta: {x: 160, y: 150}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &4424669872355366602
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3463685905233624445}
+  m_CullTransparentMesh: 0
+--- !u!114 &2961478153812854214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3463685905233624445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 50
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 3
+    m_MaxSize: 50
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'send
+
+    0'
 --- !u!1 &3531861366029030427
 GameObject:
   m_ObjectHideFlags: 0
@@ -4595,7 +5236,7 @@ GameObject:
   - component: {fileID: 7352272217987079843}
   - component: {fileID: 8732874522120753898}
   - component: {fileID: 5593090495788583930}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Msg Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4738,6 +5379,39 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "\uB098\uAC00\uAE30 \uC608\uC57D"
+--- !u!1 &3630376811462567058
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1227623743506649438}
+  m_Layer: 0
+  m_Name: Chat Bubble4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1227623743506649438
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3630376811462567058}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 6155032623427386397}
+  - {fileID: 5083991695240206221}
+  - {fileID: 6495175160248247367}
+  m_Father: {fileID: 2046839201760793264}
+  m_RootOrder: 23
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3701605752456685037
 GameObject:
   m_ObjectHideFlags: 0
@@ -4749,7 +5423,7 @@ GameObject:
   - component: {fileID: 3050943458496866169}
   - component: {fileID: 8642266598928136947}
   - component: {fileID: 5230536347576567132}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Answer5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4826,7 +5500,7 @@ GameObject:
   - component: {fileID: 1937267170704616628}
   - component: {fileID: 3874497201350247089}
   - component: {fileID: 4010394866196031726}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: PopUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4847,7 +5521,7 @@ RectTransform:
   - {fileID: 8216443607326523419}
   - {fileID: 1690857575445981999}
   m_Father: {fileID: 2046839201760793264}
-  m_RootOrder: 21
+  m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4890,6 +5564,83 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &3830288112939927084
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6495175160248247367}
+  - component: {fileID: 4499600095668610422}
+  - component: {fileID: 3800375014716310972}
+  m_Layer: 8
+  m_Name: Ingame Chat Bubble Text4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &6495175160248247367
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3830288112939927084}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1227623743506649438}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 317.5, y: -20}
+  m_SizeDelta: {x: 135, y: 21}
+  m_Pivot: {x: 1, y: 0.5}
+--- !u!222 &4499600095668610422
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3830288112939927084}
+  m_CullTransparentMesh: 0
+--- !u!114 &3800375014716310972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3830288112939927084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: c4a80f119955216499efedca61de19dd, type: 3}
+    m_FontSize: 20
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 1
+    m_MaxSize: 20
+    m_Alignment: 3
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 
 --- !u!1 &3909405311868718247
 GameObject:
   m_ObjectHideFlags: 0
@@ -4900,7 +5651,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6617502903480832001}
   - component: {fileID: 6277243890557992639}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Radio Purple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4972,7 +5723,18 @@ MonoBehaviour:
   m_Group: {fileID: 6885420613112029691}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6533426621588173272}
+        m_MethodName: SetLineColorPurple
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 0
 --- !u!1 &4000530086799272492
 GameObject:
@@ -5132,7 +5894,7 @@ GameObject:
   - component: {fileID: 5010831385707959555}
   - component: {fileID: 3580306436584635355}
   - component: {fileID: 1067593880208977518}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Checkmark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5205,7 +5967,7 @@ GameObject:
   - component: {fileID: 4049100100823224748}
   - component: {fileID: 1441077747461010792}
   - component: {fileID: 5582678349619973139}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Checkmark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5417,6 +6179,83 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &4427292735629368142
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2970090089670382164}
+  - component: {fileID: 8342635206604790489}
+  - component: {fileID: 8822762879392238000}
+  m_Layer: 8
+  m_Name: Ingame Chat Bubble Text5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2970090089670382164
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4427292735629368142}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2034228884365220921}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -317.5, y: -230}
+  m_SizeDelta: {x: 135, y: 21}
+  m_Pivot: {x: 0, y: 0.5}
+--- !u!222 &8342635206604790489
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4427292735629368142}
+  m_CullTransparentMesh: 0
+--- !u!114 &8822762879392238000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4427292735629368142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: c4a80f119955216499efedca61de19dd, type: 3}
+    m_FontSize: 20
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 1
+    m_MaxSize: 20
+    m_Alignment: 3
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 
 --- !u!1 &4462925054011750859
 GameObject:
   m_ObjectHideFlags: 0
@@ -5428,7 +6267,7 @@ GameObject:
   - component: {fileID: 7412852023091043129}
   - component: {fileID: 2178726732694538118}
   - component: {fileID: 2291839750508329359}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5502,7 +6341,7 @@ GameObject:
   - component: {fileID: 7605250722853485763}
   - component: {fileID: 422288237960701381}
   - component: {fileID: 8320462235192021529}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Checkmark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5575,7 +6414,7 @@ GameObject:
   - component: {fileID: 5299767825205521507}
   - component: {fileID: 7907425039505801397}
   - component: {fileID: 4184598362100909407}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5795,7 +6634,7 @@ GameObject:
   - component: {fileID: 1067077431748843824}
   - component: {fileID: 8915570757933934871}
   - component: {fileID: 7678886882535364308}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Checkmark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5857,6 +6696,39 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &4794704213655031510
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9019976947404687937}
+  m_Layer: 0
+  m_Name: Chat Bubble2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &9019976947404687937
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4794704213655031510}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 869990936674439460}
+  - {fileID: 634440543923133077}
+  - {fileID: 570035162667096883}
+  m_Father: {fileID: 2046839201760793264}
+  m_RootOrder: 21
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4866043208004129518
 GameObject:
   m_ObjectHideFlags: 0
@@ -5867,7 +6739,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9182165813195274134}
   - component: {fileID: 1297090697437568785}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Radio Black
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5939,7 +6811,18 @@ MonoBehaviour:
   m_Group: {fileID: 6885420613112029691}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6533426621588173272}
+        m_MethodName: SetLineColorBlack
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!1 &4868944660293805185
 GameObject:
@@ -6106,7 +6989,7 @@ GameObject:
   - component: {fileID: 4730667233829640065}
   - component: {fileID: 3701592650054989125}
   - component: {fileID: 3840877028355015353}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: PopUp Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6183,7 +7066,7 @@ GameObject:
   - component: {fileID: 3894718476631851928}
   - component: {fileID: 1833714183610158794}
   - component: {fileID: 8466487986462968515}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6238,6 +7121,79 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!1 &5149537762352450262
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8283525571291659812}
+  - component: {fileID: 979885110127855567}
+  - component: {fileID: 3461181124104997087}
+  m_Layer: 8
+  m_Name: Ingame Chat Bubble Field6
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &8283525571291659812
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5149537762352450262}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6721668296010639486}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 320, y: -230}
+  m_SizeDelta: {x: 140, y: 26}
+  m_Pivot: {x: 1, y: 0.5}
+--- !u!222 &979885110127855567
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5149537762352450262}
+  m_CullTransparentMesh: 0
+--- !u!114 &3461181124104997087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5149537762352450262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -6338,7 +7294,7 @@ GameObject:
   - component: {fileID: 7218972468320746332}
   - component: {fileID: 1352427886420023973}
   - component: {fileID: 6472013094937078307}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Checkmark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6631,6 +7587,39 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "\uB098\uAC00\uAE30 \uC608\uC57D"
+--- !u!1 &5539637905211489189
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7252726085283055457}
+  m_Layer: 0
+  m_Name: Chat Bubble3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &7252726085283055457
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5539637905211489189}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 8791151221430311899}
+  - {fileID: 5319031863107207732}
+  - {fileID: 1038796125733182695}
+  m_Father: {fileID: 2046839201760793264}
+  m_RootOrder: 22
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5540054766742778504
 GameObject:
   m_ObjectHideFlags: 0
@@ -6939,6 +7928,39 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "\uB098\uAC00\uAE30 \uC608\uC57D"
+--- !u!1 &5779173302902819333
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8552980215915907155}
+  m_Layer: 0
+  m_Name: Chat Bubble1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &8552980215915907155
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5779173302902819333}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 3365752890834107581}
+  - {fileID: 4359576621905320559}
+  - {fileID: 4382113392404634550}
+  m_Father: {fileID: 2046839201760793264}
+  m_RootOrder: 20
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5814335216381000652
 GameObject:
   m_ObjectHideFlags: 0
@@ -6949,7 +7971,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7775159093463831039}
   - component: {fileID: 7724382645885121318}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Radio Green
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7021,7 +8043,18 @@ MonoBehaviour:
   m_Group: {fileID: 6885420613112029691}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6533426621588173272}
+        m_MethodName: SetLineColorGreen
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 0
 --- !u!1 &5858343978700144058
 GameObject:
@@ -7034,7 +8067,7 @@ GameObject:
   - component: {fileID: 6895945840794005892}
   - component: {fileID: 1083662083944466714}
   - component: {fileID: 5149313801078216485}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Score Text2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7177,6 +8210,79 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "\uB098\uAC00\uAE30 \uC608\uC57D"
+--- !u!1 &6092670078486595806
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7461931486787153148}
+  - component: {fileID: 4678145350014411283}
+  - component: {fileID: 7206111754821023686}
+  m_Layer: 8
+  m_Name: Ingame Chat Bubble Field5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &7461931486787153148
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6092670078486595806}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2034228884365220921}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -320, y: -230}
+  m_SizeDelta: {x: 140, y: 26}
+  m_Pivot: {x: 0, y: 0.5}
+--- !u!222 &4678145350014411283
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6092670078486595806}
+  m_CullTransparentMesh: 0
+--- !u!114 &7206111754821023686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6092670078486595806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &6119329338871375785
 GameObject:
   m_ObjectHideFlags: 0
@@ -7188,7 +8294,7 @@ GameObject:
   - component: {fileID: 800119158053833440}
   - component: {fileID: 2620357885014702609}
   - component: {fileID: 2861393996486256433}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Time Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7264,7 +8370,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5299698850572412171}
   - component: {fileID: 153668130157134189}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Radio Orange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7336,7 +8442,18 @@ MonoBehaviour:
   m_Group: {fileID: 6885420613112029691}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6533426621588173272}
+        m_MethodName: SetLineColorOrange
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 0
 --- !u!1 &6161608143453296724
 GameObject:
@@ -7349,7 +8466,7 @@ GameObject:
   - component: {fileID: 2252218538046062186}
   - component: {fileID: 1901589708864623715}
   - component: {fileID: 8491901557300379654}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7563,6 +8680,79 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "\uB098\uAC00\uAE30 \uC608\uC57D"
+--- !u!1 &6241485417352278839
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5813128944327631745}
+  - component: {fileID: 7432882228419033433}
+  - component: {fileID: 4695844075155448385}
+  m_Layer: 8
+  m_Name: Ingame Chat Bubble Border5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5813128944327631745
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6241485417352278839}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2034228884365220921}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -325, y: -230}
+  m_SizeDelta: {x: 150, y: 36}
+  m_Pivot: {x: 0, y: 0.5}
+--- !u!222 &7432882228419033433
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6241485417352278839}
+  m_CullTransparentMesh: 0
+--- !u!114 &4695844075155448385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6241485417352278839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0.49019608, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &6266350560373868822
 GameObject:
   m_ObjectHideFlags: 0
@@ -7647,7 +8837,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4004783526430488650}
   - component: {fileID: 350428853050189859}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Radio Answer4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7733,6 +8923,79 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   m_IsOn: 0
+--- !u!1 &6341246165067560953
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 634440543923133077}
+  - component: {fileID: 7995899082747512514}
+  - component: {fileID: 6936059163493850080}
+  m_Layer: 8
+  m_Name: Ingame Chat Bubble Field2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &634440543923133077
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6341246165067560953}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 9019976947404687937}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 320, y: 190}
+  m_SizeDelta: {x: 140, y: 26}
+  m_Pivot: {x: 1, y: 0.5}
+--- !u!222 &7995899082747512514
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6341246165067560953}
+  m_CullTransparentMesh: 0
+--- !u!114 &6936059163493850080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6341246165067560953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &6344799483995382619
 GameObject:
   m_ObjectHideFlags: 0
@@ -7744,7 +9007,7 @@ GameObject:
   - component: {fileID: 3690829337338122624}
   - component: {fileID: 581613124946058988}
   - component: {fileID: 5618356329608862846}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Answer Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7967,7 +9230,7 @@ GameObject:
   - component: {fileID: 856026775318123619}
   - component: {fileID: 3597784022587571032}
   - component: {fileID: 3942212818060082002}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8240,7 +9503,7 @@ GameObject:
   - component: {fileID: 5059663388791255854}
   - component: {fileID: 5336919276038721675}
   - component: {fileID: 5889788254222289132}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Checkmark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8313,7 +9576,7 @@ GameObject:
   - component: {fileID: 1654915664567510152}
   - component: {fileID: 1888700185200644003}
   - component: {fileID: 7443149111978850859}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Nickname Text5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8390,7 +9653,7 @@ GameObject:
   - component: {fileID: 4547125868457223683}
   - component: {fileID: 6698818575342776614}
   - component: {fileID: 8430630431415286999}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Answer1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8467,7 +9730,7 @@ GameObject:
   - component: {fileID: 2641538236762708757}
   - component: {fileID: 5136251533987608264}
   - component: {fileID: 4693836418208047768}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Score Text5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8533,6 +9796,79 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 600
+--- !u!1 &7084444713441433090
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6155032623427386397}
+  - component: {fileID: 497743457571660752}
+  - component: {fileID: 1459164133315628034}
+  m_Layer: 8
+  m_Name: Ingame Chat Bubble Border4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &6155032623427386397
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7084444713441433090}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1227623743506649438}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 325, y: -20}
+  m_SizeDelta: {x: 150, y: 36}
+  m_Pivot: {x: 1, y: 0.5}
+--- !u!222 &497743457571660752
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7084444713441433090}
+  m_CullTransparentMesh: 0
+--- !u!114 &1459164133315628034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7084444713441433090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0.49019608, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &7122684210884458971
 GameObject:
   m_ObjectHideFlags: 0
@@ -8544,7 +9880,7 @@ GameObject:
   - component: {fileID: 4918025542700677812}
   - component: {fileID: 4096056938988514100}
   - component: {fileID: 5375325068629693270}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Checkmark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8617,7 +9953,7 @@ GameObject:
   - component: {fileID: 8178723087880167974}
   - component: {fileID: 6450934403735926930}
   - component: {fileID: 1168780221727056984}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8691,7 +10027,7 @@ GameObject:
   - component: {fileID: 4368098281719281023}
   - component: {fileID: 7250873917438953569}
   - component: {fileID: 621256187600145815}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Time Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8757,6 +10093,83 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 3
+--- !u!1 &7323278421067471699
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1038796125733182695}
+  - component: {fileID: 9061130736125107842}
+  - component: {fileID: 6660933560840821573}
+  m_Layer: 8
+  m_Name: Ingame Chat Bubble Text3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1038796125733182695
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7323278421067471699}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7252726085283055457}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -317.5, y: -20}
+  m_SizeDelta: {x: 135, y: 21}
+  m_Pivot: {x: 0, y: 0.5}
+--- !u!222 &9061130736125107842
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7323278421067471699}
+  m_CullTransparentMesh: 0
+--- !u!114 &6660933560840821573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7323278421067471699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: c4a80f119955216499efedca61de19dd, type: 3}
+    m_FontSize: 20
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 1
+    m_MaxSize: 20
+    m_Alignment: 3
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 
 --- !u!1 &7423028402597127382
 GameObject:
   m_ObjectHideFlags: 0
@@ -8768,7 +10181,7 @@ GameObject:
   - component: {fileID: 1739212565599516922}
   - component: {fileID: 7000763371197277335}
   - component: {fileID: 5120310300566351013}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8841,7 +10254,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1727938993455722425}
   - component: {fileID: 7810557514160216802}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Radio Answer3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8927,6 +10340,79 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   m_IsOn: 0
+--- !u!1 &7481235194480645833
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8791151221430311899}
+  - component: {fileID: 3082286899971882261}
+  - component: {fileID: 2439742277124879823}
+  m_Layer: 8
+  m_Name: Ingame Chat Bubble Border3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &8791151221430311899
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7481235194480645833}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7252726085283055457}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -325, y: -20}
+  m_SizeDelta: {x: 150, y: 36}
+  m_Pivot: {x: 0, y: 0.5}
+--- !u!222 &3082286899971882261
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7481235194480645833}
+  m_CullTransparentMesh: 0
+--- !u!114 &2439742277124879823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7481235194480645833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0.49019608, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &7481253202472852445
 GameObject:
   m_ObjectHideFlags: 0
@@ -8938,7 +10424,7 @@ GameObject:
   - component: {fileID: 1257686829778899179}
   - component: {fileID: 7388913614161667575}
   - component: {fileID: 71978784936644462}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Nickname Text4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9320,7 +10806,7 @@ GameObject:
   - component: {fileID: 7220896817467900437}
   - component: {fileID: 3375704908792768050}
   - component: {fileID: 8783798132321044511}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Checkmark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9541,7 +11027,7 @@ GameObject:
   - component: {fileID: 1389198349605043156}
   - component: {fileID: 8038143148509847445}
   - component: {fileID: 2639207984986561590}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Answer2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9618,7 +11104,7 @@ GameObject:
   - component: {fileID: 3054965467652933557}
   - component: {fileID: 528691144194159867}
   - component: {fileID: 7216280130311923669}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Checkmark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9838,7 +11324,7 @@ GameObject:
   - component: {fileID: 2236723470423114086}
   - component: {fileID: 1573551811395975754}
   - component: {fileID: 6713225520206119864}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Result PopUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9868,7 +11354,7 @@ RectTransform:
   - {fileID: 312535995433591361}
   - {fileID: 2641538236762708757}
   m_Father: {fileID: 2046839201760793264}
-  m_RootOrder: 23
+  m_RootOrder: 28
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -9999,7 +11485,7 @@ GameObject:
   - component: {fileID: 1557716049770922583}
   - component: {fileID: 2683357216409921302}
   - component: {fileID: 4364198826946512266}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Score Text3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10076,7 +11562,7 @@ GameObject:
   - component: {fileID: 740329473799774757}
   - component: {fileID: 2108747893255408394}
   - component: {fileID: 8162594065445396297}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10227,7 +11713,7 @@ GameObject:
   - component: {fileID: 2326098804816749298}
   - component: {fileID: 2043081491386873395}
   - component: {fileID: 3649726241068371385}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Time Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10534,7 +12020,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3332448950555719401}
   - component: {fileID: 7343857695098827356}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Radio Yellow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10606,7 +12092,18 @@ MonoBehaviour:
   m_Group: {fileID: 6885420613112029691}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6533426621588173272}
+        m_MethodName: SetLineColorYellow
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 0
 --- !u!1 &8814310313206041037
 GameObject:
@@ -10693,7 +12190,7 @@ GameObject:
   - component: {fileID: 630077741522115122}
   - component: {fileID: 7620784822766066217}
   - component: {fileID: 1517439497824780407}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: PopUp Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10770,7 +12267,7 @@ GameObject:
   - component: {fileID: 8132022571739933907}
   - component: {fileID: 910762599566526648}
   - component: {fileID: 6943378843798101097}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: WaitChoiceAnswer PopUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10791,7 +12288,7 @@ RectTransform:
   - {fileID: 4730667233829640065}
   - {fileID: 2326098804816749298}
   m_Father: {fileID: 2046839201760793264}
-  m_RootOrder: 25
+  m_RootOrder: 30
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -10834,6 +12331,79 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &8893883361332844238
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 869990936674439460}
+  - component: {fileID: 5938288120465687344}
+  - component: {fileID: 5831815866039090601}
+  m_Layer: 8
+  m_Name: Ingame Chat Bubble Border2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &869990936674439460
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8893883361332844238}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 9019976947404687937}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 325, y: 190}
+  m_SizeDelta: {x: 150, y: 36}
+  m_Pivot: {x: 1, y: 0.5}
+--- !u!222 &5938288120465687344
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8893883361332844238}
+  m_CullTransparentMesh: 0
+--- !u!114 &5831815866039090601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8893883361332844238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0.49019608, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &8997912114606331967
 GameObject:
   m_ObjectHideFlags: 0
@@ -10845,8 +12415,8 @@ GameObject:
   - component: {fileID: 3365752890834107581}
   - component: {fileID: 8627172353631517668}
   - component: {fileID: 821409185276792}
-  m_Layer: 5
-  m_Name: Ingame Chat Bubble Img Black
+  m_Layer: 8
+  m_Name: Ingame Chat Bubble Border1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10859,20 +12429,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8997912114606331967}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 4359576621905320559}
-  - {fileID: 4382113392404634550}
-  m_Father: {fileID: 2046839201760793264}
-  m_RootOrder: 20
+  m_Children: []
+  m_Father: {fileID: 8552980215915907155}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -250, y: 190}
-  m_SizeDelta: {x: 150, y: 35}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -325, y: 190}
+  m_SizeDelta: {x: 150, y: 36}
+  m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &8627172353631517668
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10957,13 +12525,20 @@ RectTransform:
   - {fileID: 3760189811565972854}
   - {fileID: 1785286643338291972}
   - {fileID: 580925072348455595}
-  - {fileID: 3365752890834107581}
+  - {fileID: 8552980215915907155}
+  - {fileID: 9019976947404687937}
+  - {fileID: 7252726085283055457}
+  - {fileID: 1227623743506649438}
+  - {fileID: 2034228884365220921}
+  - {fileID: 6721668296010639486}
   - {fileID: 1937267170704616628}
   - {fileID: 1952939334913282945}
   - {fileID: 2236723470423114086}
   - {fileID: 7485317546183020320}
   - {fileID: 8132022571739933907}
   - {fileID: 7841723695353028225}
+  - {fileID: 8431124802635489373}
+  - {fileID: 8098732609784400605}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11038,6 +12613,36 @@ MonoBehaviour:
   m_imgTempCharacter5: {fileID: 7812448083756867652}
   m_imgTempCharacter6: {fileID: 6445967364771069198}
   m_ifChatBox: {fileID: 8456427862667544830}
+  m_textSendPointCount: {fileID: 2961478153812854214}
+  m_textRecvPointCount: {fileID: 646993350749938278}
+  m_listGoChatBubble:
+  - {fileID: 5779173302902819333}
+  - {fileID: 4794704213655031510}
+  - {fileID: 5539637905211489189}
+  - {fileID: 3630376811462567058}
+  - {fileID: 983191684404652127}
+  - {fileID: 2930816930246571398}
+  m_listRtChatBubbleBorder:
+  - {fileID: 3365752890834107581}
+  - {fileID: 869990936674439460}
+  - {fileID: 8791151221430311899}
+  - {fileID: 6155032623427386397}
+  - {fileID: 5813128944327631745}
+  - {fileID: 3681904607919601022}
+  m_listRtChatBubbleField:
+  - {fileID: 4359576621905320559}
+  - {fileID: 634440543923133077}
+  - {fileID: 5319031863107207732}
+  - {fileID: 5083991695240206221}
+  - {fileID: 7461931486787153148}
+  - {fileID: 8283525571291659812}
+  m_listTextChatBubble:
+  - {fileID: 470530602957507930}
+  - {fileID: 8380001070894529450}
+  - {fileID: 6660933560840821573}
+  - {fileID: 3800375014716310972}
+  - {fileID: 8822762879392238000}
+  - {fileID: 2176339542039700051}
   m_goLinePrefab: {fileID: 6258408145050984245, guid: d287bea394b7c0d49ae6ddf72e3271ae,
     type: 3}
   m_goIngameTime: {fileID: 7730521225709882969}
@@ -11131,7 +12736,7 @@ GameObject:
   - component: {fileID: 1952939334913282945}
   - component: {fileID: 2341018329297550465}
   - component: {fileID: 2340288367150327947}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Answer PopUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11153,7 +12758,7 @@ RectTransform:
   - {fileID: 3690829337338122624}
   - {fileID: 4368098281719281023}
   m_Father: {fileID: 2046839201760793264}
-  m_RootOrder: 22
+  m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

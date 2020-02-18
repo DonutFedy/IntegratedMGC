@@ -573,8 +573,8 @@ public class MiniGameTwenty : MiniGame
     private void SendChallengeAnswer()
     {
         //1// 스무고개 정답도전 상태에서 채팅 입력
-        m_sendChallengeAnswerPacket.iGameType = (int)m_eGameType;
-        m_sendChallengeAnswerPacket.iStructType = (int)GameData.EnumGameTwentyStructType.SEND_CHALLENGE_ANSWER_PACKET;
+        m_sendChallengeAnswerPacket.byteGameType = (byte)m_eGameType;
+        m_sendChallengeAnswerPacket.byteStructType = (byte)GameData.EnumGameTwentyStructType.SEND_CHALLENGE_ANSWER_PACKET;
         m_sendChallengeAnswerPacket.strChat = m_ifChatBox.text;
         //1//
 
@@ -589,8 +589,8 @@ public class MiniGameTwenty : MiniGame
     private void SendQuestion()
     {
         //1// 스무고개 질문하기 상태에서 채팅 입력
-        m_sendQuestionPacket.iGameType = (int)m_eGameType;
-        m_sendQuestionPacket.iStructType = (int)GameData.EnumGameTwentyStructType.SEND_QUESTION_PACKET;
+        m_sendQuestionPacket.byteGameType = (byte)m_eGameType;
+        m_sendQuestionPacket.byteStructType = (byte)GameData.EnumGameTwentyStructType.SEND_QUESTION_PACKET;
         m_sendQuestionPacket.strChat = m_ifChatBox.text;
         //1//
 
@@ -971,8 +971,8 @@ public class MiniGameTwenty : MiniGame
 
     public void SendYes()
     {
-        m_sendYesOrNoPacket.iGameType = (int)m_eGameType;
-        m_sendYesOrNoPacket.iStructType = (int)GameData.EnumGameTwentyStructType.SEND_YES_OR_NO_PACKET;
+        m_sendYesOrNoPacket.byteGameType = (byte)m_eGameType;
+        m_sendYesOrNoPacket.byteStructType = (byte)GameData.EnumGameTwentyStructType.SEND_YES_OR_NO_PACKET;
         m_sendYesOrNoPacket.iYesOrNo = 1;
         
         //1// yes 패킷 보내고 yes, no button 숨김
@@ -985,8 +985,8 @@ public class MiniGameTwenty : MiniGame
 
     public void SendNo()
     {
-        m_sendYesOrNoPacket.iGameType = (int)m_eGameType;
-        m_sendYesOrNoPacket.iStructType = (int)GameData.EnumGameTwentyStructType.SEND_YES_OR_NO_PACKET;
+        m_sendYesOrNoPacket.byteGameType = (byte)m_eGameType;
+        m_sendYesOrNoPacket.byteStructType = (byte)GameData.EnumGameTwentyStructType.SEND_YES_OR_NO_PACKET;
         m_sendYesOrNoPacket.iYesOrNo = 0;
 
         //1// no 패킷 보내고 yes, no button 숨김
@@ -1039,6 +1039,8 @@ public class MiniGameTwenty : MiniGame
         m_goChatCountBox.SetActive(false);
         m_goChatBox.SetActive(false);
         m_goChallengeAnswer.SetActive(false);
+
+        m_ifChatBox.text = "";
 
         m_textChatBoxText.color = Color.black;
         m_textChatBoxText.text = "";
@@ -1195,6 +1197,7 @@ public class MiniGameTwenty : MiniGame
         m_textRound.gameObject.SetActive(false);
         m_goAnswerText.SetActive(false);
         m_goPlayerExitPopup.SetActive(false);
+        m_goReserveExitOrCancel.SetActive(false);
 
         m_goResultPopup.SetActive(true);
     }
@@ -1249,8 +1252,8 @@ public class MiniGameTwenty : MiniGame
     {
         if(m_bReserveExit)
         {
-            m_sendReserveExitOrCancelPacket.iGameType = (int)GameData.EnumGameType.TWENTY;
-            m_sendReserveExitOrCancelPacket.iStructType = (int)GameData.EnumGameTwentyStructType.SEND_RESERVE_EXIT_OR_CANCEL_PACKET;
+            m_sendReserveExitOrCancelPacket.byteGameType = (byte)GameData.EnumGameType.TWENTY;
+            m_sendReserveExitOrCancelPacket.byteStructType = (byte)GameData.EnumGameTwentyStructType.SEND_RESERVE_EXIT_OR_CANCEL_PACKET;
             m_sendReserveExitOrCancelPacket.iReserve = 0;
 
             byte[] packet = Serializer.StructureToByte(m_sendReserveExitOrCancelPacket);
@@ -1264,8 +1267,8 @@ public class MiniGameTwenty : MiniGame
         }
         else
         {
-            m_sendReserveExitOrCancelPacket.iGameType = (int)GameData.EnumGameType.TWENTY;
-            m_sendReserveExitOrCancelPacket.iStructType = (int)GameData.EnumGameTwentyStructType.SEND_RESERVE_EXIT_OR_CANCEL_PACKET;
+            m_sendReserveExitOrCancelPacket.byteGameType = (byte)GameData.EnumGameType.TWENTY;
+            m_sendReserveExitOrCancelPacket.byteStructType = (byte)GameData.EnumGameTwentyStructType.SEND_RESERVE_EXIT_OR_CANCEL_PACKET;
             m_sendReserveExitOrCancelPacket.iReserve = 1;
             
             byte[] packet = Serializer.StructureToByte(m_sendReserveExitOrCancelPacket);
@@ -1288,5 +1291,10 @@ public class MiniGameTwenty : MiniGame
             else
                 m_goAnswerText.SetActive(false);
         }
+    }
+
+    public void ExitGameTwenty()
+    {
+        ExitGame(m_eGameType);
     }
 }

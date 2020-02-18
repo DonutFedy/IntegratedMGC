@@ -236,6 +236,18 @@ namespace PACKET
             ++m_index;
             return this;
         }
+        public C_Buffer get(ref byte[] buf)
+        {
+            buf = new byte[m_length-m_index]; 
+            int curIndex = m_index;
+            while(curIndex<m_length)
+            {
+                buf[curIndex - m_index] = m_buf[curIndex];
+                ++curIndex;
+            }
+            m_index = curIndex;
+            return this;
+        }
         public C_Buffer get(ref Int16 nInt)
         {
             if (m_length <= m_index)

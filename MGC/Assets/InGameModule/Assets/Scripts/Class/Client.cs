@@ -62,12 +62,10 @@ public class Client
 
     public void SendPacket(byte[] packet)
     {
-        GameManager.m_Instance.makePacket(packet);
-
-        //if (m_tcp == null)
-        //    return;
-        //m_stream.Write(packet, 0, packet.Length);
-        //m_stream.Flush();
+        if (m_tcp == null)
+            return;
+        m_stream.Write(packet, 0, packet.Length);
+        m_stream.Flush();
     }
 
     public void SendMessage(string message)

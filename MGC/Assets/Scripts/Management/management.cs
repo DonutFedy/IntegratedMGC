@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using PACKET;
+using System;
 
 public abstract class management : MonoBehaviour {
 
@@ -24,14 +25,21 @@ public abstract class management : MonoBehaviour {
         // 현재 시간 보다 낮거나 같은 이벤트만 처리
         C_BasePacket data = null;
 
-        while (m_eventBuffer.Count > 0)
+        try
         {
-            data = m_eventBuffer.Peek();
-            if (fCurGameTime <= data.m_fEventTime)
-                break;
-            // 이벤트 처리
-            processEvent(data);
-            m_eventBuffer.Dequeue();
+            while (m_eventBuffer.Count > 0)
+            {
+                data = m_eventBuffer.Peek();
+                if (fCurGameTime <= data.m_fEventTime)
+                    break;
+                // 이벤트 처리
+                processEvent(data);
+                m_eventBuffer.Dequeue();
+            }
+        }
+        catch(Exception ex)
+        {
+            Debug.LogError("ingameMGR :: "+ex);
         }
     }
 

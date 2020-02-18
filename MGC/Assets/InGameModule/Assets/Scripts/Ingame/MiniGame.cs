@@ -47,12 +47,12 @@ public class MiniGame : MonoBehaviour
     {
         GameData.SendExaminerSelectedAnswerPacket examinerSelectedAnswer = new GameData.SendExaminerSelectedAnswerPacket();
 
-        examinerSelectedAnswer.iGameType = (int)m_eGameType;
+        examinerSelectedAnswer.byteGameType = (byte)m_eGameType;
 
         if(m_eGameType.Equals(GameData.EnumGameType.TWENTY))
-            examinerSelectedAnswer.iStructType = (int)GameData.EnumGameTwentyStructType.SEND_EXAMINER_SELECT_ANSWER_PACKET;
+            examinerSelectedAnswer.byteStructType = (byte)GameData.EnumGameTwentyStructType.SEND_EXAMINER_SELECT_ANSWER_PACKET;
         else if(m_eGameType.Equals(GameData.EnumGameType.CATCH))
-            examinerSelectedAnswer.iStructType = (int)GameData.EnumGameCatchStructType.SEND_EXAMINER_SELECT_ANSWER_PACKET;
+            examinerSelectedAnswer.byteStructType = (byte)GameData.EnumGameCatchStructType.SEND_EXAMINER_SELECT_ANSWER_PACKET;
 
         examinerSelectedAnswer.strAnswer = m_strAnswer;
 

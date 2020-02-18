@@ -7,15 +7,18 @@ using System.Runtime.InteropServices;
 public class GameData
 {
     //0// CONST DATA
-    public const int iStringStartIdx = 8;
+    public const int iStringStartIdx = 2;
     public const int iStringAnswerSize = 31;
     public const int iStringNicknameSize = 31;
     public const int iStringChatSize = 91;
+    public const int iReceiveIngameTimePacketStructSize = 6;
+    public const int iReceivePointPacketStructSize = 18;
     //0//
 
     //1// GAME DATA
-    public enum EnumGameType
+    public enum EnumGameType : byte
     {
+        NONE,
         TWENTY,
         RELAY,
         BAN,
@@ -25,9 +28,6 @@ public class GameData
     public enum EnumGameTwentyStructType : byte
     {
         NONE,
-        SEND_GAME_START_PACKET,
-        RECEIVE_ROOM_MASTER_PACKET,
-        SEND_GAME_ALL_READY_PACKET,
         RECEIVE_PLAYER_POSITION_PACKET,
         SEND_GAME_READY_PACKET,
         RECEIVE_POPUP_TIME_START_PACKET,
@@ -56,22 +56,19 @@ public class GameData
         RECEIVE_QUESTION_COUNT_PACKET
     }
 
-    public enum EnumGameRelayStructType
+    public enum EnumGameRelayStructType : byte
     {
 
     }
 
-    public enum EnumGameBanStructType
+    public enum EnumGameBanStructType : byte
     {
 
     }
 
-    public enum EnumGameCatchStructType
+    public enum EnumGameCatchStructType : byte
     {
         NONE,
-        SEND_GAME_START_PACKET,
-        RECEIVE_ROOM_MASTER_PACKET,
-        SEND_GAME_ALL_READY_PACKET,
         RECEIVE_PLAYER_POSITION_PACKET,
         SEND_GAME_READY_PACKET,
         RECEIVE_POPUP_TIME_START_PACKET,
@@ -86,15 +83,27 @@ public class GameData
         RECEIVE_CHAT_PACKET
     }
     
-    public enum EnumPlayerState
+    public enum EnumPlayerState : byte
     {
         EXAMINER,
         CHALLENGER,
         AWAITER
     }
 
-    public enum EnumPlayerColor
+    public enum EnumPlayerColor : byte
     {
+        RED,
+        ORANGE,
+        YELLOW,
+        GREEN,
+        BLUE,
+        PURPLE
+    }
+
+    public enum EnumLineColor : byte
+    {
+        BLACK,
+        WHITE,
         RED,
         ORANGE,
         YELLOW,
@@ -106,11 +115,11 @@ public class GameData
 
     //2// SEND DATA
     [Serializable]
-    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 47)]
+    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 41)]
     public struct SendGameStartPacket
     {
-        public int iGameType;
-        public int iStructType;        
+        public byte byteGameType;
+        public byte byteStructType;        
         public int iRoomNum;
         public int iPlayerColor;
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 31)]
@@ -118,97 +127,107 @@ public class GameData
     }
 
     [Serializable]
-    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 8)]
+    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 2)]
     public struct SendGameReadyPacket
     {
-        public int iGameType;
-        public int iStructType;
+        public byte byteGameType;
+        public byte byteStructType;
     }
 
     [Serializable]
-    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 8)]
+    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 2)]
     public struct SendGameAllReadyPacket
     {
-        public int iGameType;
-        public int iStructType;
+        public byte byteGameType;
+        public byte byteStructType;
     }
 
     [Serializable]
-    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 39)]
+    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 33)]
     public struct SendExaminerSelectedAnswerPacket
     {
-        public int iGameType;
-        public int iStructType;
+        public byte byteGameType;
+        public byte byteStructType;
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 31)]
         public string strAnswer;
     }
 
     [Serializable]
-    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 99)]
+    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 93)]
     public struct SendQuestionPacket
     {
-        public int iGameType;
-        public int iStructType;
+        public byte byteGameType;
+        public byte byteStructType;
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 91)]
         public string strChat;
     }
 
     [Serializable]
-    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 39)]
+    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 33)]
     public struct SendChallengeAnswerPacket
     {
-        public int iGameType;
-        public int iStructType;
+        public byte byteGameType;
+        public byte byteStructType;
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 31)]
         public string strChat;
     }
 
     [Serializable]
-    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 12)]
+    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 6)]
     public struct SendYesOrNoPacket
     {
-        public int iGameType;
-        public int iStructType;
+        public byte byteGameType;
+        public byte byteStructType;
         public int iYesOrNo;
     }
 
     [Serializable]
-    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 12)]
+    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 6)]
     public struct SendReserveExitOrCancelPacket
     {
-        public int iGameType;
-        public int iStructType;
+        public byte byteGameType;
+        public byte byteStructType;
         public int iReserve;
     }
 
     [Serializable]
-    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 24)]
+    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 18)]
     public struct SendPointPacket
     {
-        public int iGameType;
-        public int iStructType;
+        public byte byteGameType;
+        public byte byteStructType;
         public int iLineIdx;
         public int iColor;
         public float fX;
         public float fY;
     }
+
+    [Serializable]
+    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 93)]
+    public struct SendChatPacket
+    {
+        public byte byteGameType;
+        public byte byteStructType;
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 91)]
+        public string strChat;
+    }
     //2//
 
     //3// RECEIVE DATA
     [Serializable]
-    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 8)]
+    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 2)]
     public struct ReceiveRoomMasterPacket
     {
-        public int iGameType;
-        public int iStructType;
+        public byte byteGameType;
+        public byte byteStructType;
     }
     
     [Serializable]
-    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 187)]
+    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 161)]
     public struct ReceivePlayerPositionTwentyPacket
     {
-        public int iGameType;
-        public int iStructType;
+        public byte byteGameType;
+        public byte byteStructType;
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 31)]
         public string strPlayersID_Position1;
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 31)]
@@ -219,20 +238,15 @@ public class GameData
         public string strPlayersID_Position4;
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 31)]
         public string strPlayersID_Position5;
-        public int iPlayersColor_Position1;
-        public int iPlayersColor_Position2;
-        public int iPlayersColor_Position3;
-        public int iPlayersColor_Position4;
-        public int iPlayersColor_Position5;
         public int iPlayerCount;
     }
 
     [Serializable]
-    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 222)]
+    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 216)]
     public struct ReceivePlayerPositionCatchPacket
     {
-        public int iGameType;
-        public int iStructType;
+        public byte byteGameType;
+        public byte byteStructType;
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 31)]
         public string strPlayersID_Position1;
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 31)]
@@ -255,27 +269,27 @@ public class GameData
     }
 
     [Serializable]
-    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 8)]
+    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 2)]
     public struct ReceivePopupTimeStartPacket
     {
-        public int iGameType;
-        public int iStructType;
+        public byte byteGameType;
+        public byte byteStructType;
     }
 
     [Serializable]
-    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 8)]
+    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 2)]
     public struct ReceivePopupTimeEndPacket
     {
-        public int iGameType;
-        public int iStructType;
+        public byte byteGameType;
+        public byte byteStructType;
     }
 
     [Serializable]
-    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 163)]
+    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 157)]
     public struct ReceiveExaminerAnswersPacket
     {
-        public int iGameType;
-        public int iStructType;
+        public byte byteGameType;
+        public byte byteStructType;
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 31)]
         public string strAnswer1;
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 31)]
@@ -289,28 +303,28 @@ public class GameData
     }
 
     [Serializable]
-    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 8)]
+    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 2)]
     public struct ReceiveSelectCompletePacket
     {
-        public int iGameType;
-        public int iStructType;        
+        public byte byteGameType;
+        public byte byteStructType;        
     }
 
     [Serializable]
-    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 12)]
+    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 6)]
     public struct ReceiveIngameTimePacket
     {
-        public int iGameType;
-        public int iStructType;
+        public byte byteGameType;
+        public byte byteStructType;
         public int iIngameTime;
     }
 
     [Serializable]
-    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 130)]
+    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 124)]
     public struct ReceiveQuestionPacket
     {
-        public int iGameType;
-        public int iStructType;
+        public byte byteGameType;
+        public byte byteStructType;
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 31)]
         public string strNickname;
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 91)]
@@ -318,11 +332,11 @@ public class GameData
     }
 
     [Serializable]
-    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 74)]
+    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 68)]
     public struct ReceiveCheckAnswerPacket
     {
-        public int iGameType;
-        public int iStructType;
+        public byte byteGameType;
+        public byte byteStructType;
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 31)]
         public string strNickname;
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 31)]
@@ -331,33 +345,33 @@ public class GameData
     }
 
     [Serializable]
-    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 43)]
+    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 37)]
     public struct ReceiveYesOrNoPacket
     {
-        public int iGameType;
-        public int iStructType;
+        public byte byteGameType;
+        public byte byteStructType;
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 31)]
         public string strNickname;
         public int iYesOrNo;
     }
 
     [Serializable]
-    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 39)]
+    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 33)]
     public struct ReceiveNextChallengerPacket
     {
-        public int iGameType;
-        public int iStructType;
+        public byte byteGameType;
+        public byte byteStructType;
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 31)]
         public string strNickname;
         public int iChangeType;
     }
 
     [Serializable]
-    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 74)]
+    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 68)]
     public struct ReceiveRoundEndPacket
     {
-        public int iGameType;
-        public int iStructType;
+        public byte byteGameType;
+        public byte byteStructType;
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 31)]
         public string strNextExaminer;
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 31)]
@@ -366,40 +380,40 @@ public class GameData
     }
 
     [Serializable]
-    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 43)]
+    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 37)]
     public struct ReceiveScorePacket
     {
-        public int iGameType;
-        public int iStructType;
+        public byte byteGameType;
+        public byte byteStructType;
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 31)]
         public string strNickname;
         public int iScore;
     }
 
     [Serializable]
-    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 8)]
+    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 2)]
     public struct ReceiveAnswerPopupTimePacket
     {
-        public int iGameType;
-        public int iStructType;
+        public byte byteGameType;
+        public byte byteStructType;
     }
 
     [Serializable]
-    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 39)]
+    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 33)]
     public struct ReceiveAnswerPopupAnswerPacket
     {
-        public int iGameType;
-        public int iStructType;
+        public byte byteGameType;
+        public byte byteStructType;
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 31)]
         public string strAnswer;
     }
 
     [Serializable]
-    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 183)]
+    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 177)]
     public struct ReceiveGameEndPacket
     {
-        public int iGameType;
-        public int iStructType;
+        public byte byteGameType;
+        public byte byteStructType;
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 31)]
         public string strNickname1;
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 31)]
@@ -418,22 +432,22 @@ public class GameData
     }
 
     [Serializable]
-    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 43)]
+    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 37)]
     public struct ReceiveExaminerExitPacket
     {
-        public int iGameType;
-        public int iStructType;
+        public byte byteGameType;
+        public byte byteStructType;
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 31)]
         public string strNickname;
         public int iGameEnd;
     }
 
     [Serializable]
-    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 43)]
+    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 41)]
     public struct ReceiveNonExaminerExitPacket
     {
-        public int iGameType;
-        public int iStructType;
+        public byte byteGameType;
+        public byte byteStructType;
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 31)]
         public string strNickname;
         public int iGameEnd;
@@ -441,43 +455,55 @@ public class GameData
     }
 
     [Serializable]
-    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 8)]
+    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 2)]
     public struct ReceiveExitPacket
     {
-        public int iGameType;
-        public int iStructType;
+        public byte byteGameType;
+        public byte byteStructType;
     }
 
     [Serializable]
-    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 43)]
+    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 37)]
     public struct ReceiveReserveExitOrCancelNicknamePacket
     {
-        public int iGameType;
-        public int iStructType;
+        public byte byteGameType;
+        public byte byteStructType;
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 31)]
         public string strNickname;
         public int iReserve;
     }
 
     [Serializable]
-    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 12)]
+    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 6)]
     public struct ReceiveQuestionCountPacket
     {
-        public int iGameType;
-        public int iStructType;
+        public byte byteGameType;
+        public byte byteStructType;
         public int iQuestionCount;
     }
 
     [Serializable]
-    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 24)]
+    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 18)]
     public struct ReceivePointPacket
     {
-        public int iGameType;
-        public int iStructType;
+        public byte byteGameType;
+        public byte byteStructType;
         public int iLineIdx;
         public int iColor;
         public float fX;
         public float fY;
+    }
+
+    [Serializable]
+    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 101)]
+    public struct ReceiveChatPacket
+    {
+        public byte byteGameType;
+        public byte byteStructType;
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 91)]
+        public string strChat;
+        public int iAnswer;
+        public int iPlayerIdx;
     }
     //3//
 }

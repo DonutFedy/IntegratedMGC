@@ -1133,10 +1133,16 @@ namespace PACKET
     public class C_InGamePacket : C_BasePacket
     {
         public byte[]           m_gameData;
+
+        public C_InGamePacket()
+        {
+            m_basicType = BasePacketType.basePacketTypeGame;
+            m_bResponse = true;
+        }
+
         public override void deserialize(C_Buffer buf)
         {
-            m_gameData = new byte[buf.m_length-1];
-            buf.m_buf.CopyTo(m_gameData, 1);
+            buf.get(ref m_gameData);
         }
 
         public override C_Buffer serialize()

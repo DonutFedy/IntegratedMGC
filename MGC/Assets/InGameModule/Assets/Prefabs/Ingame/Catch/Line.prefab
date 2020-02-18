@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5045e06599234054188e4c935e8cec5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_iSendPointCount: 0
   m_lineRenderer: {fileID: 3200761924421531553}
 --- !u!120 &3200761924421531553
 LineRenderer:

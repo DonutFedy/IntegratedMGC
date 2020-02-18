@@ -1,15 +1,27 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using System;
 
 public class MiniGameCatch : MiniGame
 {
+    private int m_iRecvPointCount;   // 임시
+    private int m_iLineColor;
     private Line m_line = null;
     private List<Line> m_listLine;
+    private List<bool> m_listIsChatBoxOn = new List<bool>();
+    private List<float> m_listFChatBoxLimitTime = new List<float>();
     private bool m_bLastPointInSketchBook;
     private float m_fSketchBookWidthHalf, m_fSketchBookHeightHalf;
     private Vector2 m_vMousePos, m_vSketchBookPos, m_vPointOutOfSketchBook;
     private Camera m_mainCamera;
+    private GameData.SendChatPacket m_sendChatPacket;
 
+    public Text m_textSendPointCount, m_textRecvPointCount;     // 임시
+    public List<GameObject> m_listGoChatBubble;
+    public List<RectTransform> m_listRtChatBubbleBorder;
+    public List<RectTransform> m_listRtChatBubbleField;
+    public List<Text> m_listTextChatBubble;
     public GameObject m_goLinePrefab, m_goIngameTime, m_goRadioGroupColor, m_goEraseAllButton, m_goGiveUpButton, m_goTextExaminer;
     public RectTransform m_rtSketchBook;
 
@@ -36,6 +48,15 @@ public class MiniGameCatch : MiniGame
 
     private void Update()
     {
+        //temp//
+        if (m_line == null)
+            m_textSendPointCount.text = "send\n0";
+        else
+            m_textSendPointCount.text = "send\n" + m_line.m_iSendPointCount;
+
+        m_textRecvPointCount.text = "recv\n" + m_iRecvPointCount;
+        //temp//
+        
         ////0// 라인 생성 -> 그릴 차례일 때만 활성화
         //m_vMousePos = m_mainCamera.ScreenToWorldPoint(Input.mousePosition);
 
@@ -70,8 +91,8 @@ public class MiniGameCatch : MiniGame
         {
             if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
             {
-                //SendChat();
-                Chat();
+                SendChat();
+                //Chat(m_ifChatBox.text);
             }
         }
         else
@@ -85,6 +106,12 @@ public class MiniGameCatch : MiniGame
         }
         //0//
 
+        // 채팅 수 카운팅
+        CountChat();
+
+        // 입력된 채팅 3초 후에 사라짐
+        ChatBoxOnAndOff();
+
         //1// 스케치북에 선 그리기 -> 라운드 시작 && 출제자일 때 활성화
         if (m_bRoundStart && m_ePlayerState.Equals(GameData.EnumPlayerState.EXAMINER))
         {
@@ -96,7 +123,10 @@ public class MiniGameCatch : MiniGame
                 if (Input.GetMouseButtonDown(0))
                 {
                     GameObject goLine = Instantiate(m_goLinePrefab, m_rtSketchBook.transform);
+                    goLine.GetComponent<LineRenderer>().startColor = SetColor(m_iLineColor);
+                    goLine.GetComponent<LineRenderer>().endColor = SetColor(m_iLineColor);
                     m_line = goLine.GetComponent<Line>();
+                    
                     m_listLine.Add(m_line);
                 }
                 //1//
@@ -109,12 +139,14 @@ public class MiniGameCatch : MiniGame
                     {
                         //1// 라인 프리팹 생성
                         GameObject goLine = Instantiate(m_goLinePrefab, m_rtSketchBook.transform);
+                        goLine.GetComponent<LineRenderer>().startColor = SetColor(m_iLineColor);
+                        goLine.GetComponent<LineRenderer>().endColor = SetColor(m_iLineColor);
                         m_line = goLine.GetComponent<Line>();
                         m_listLine.Add(m_line);
                         //1//
 
                         //2// 선분과 선분 교점 구해서 선 그림
-                        DrawLineWithIntersection(m_vMousePos, m_listLine.Count - 1);
+                        DrawLineWithIntersection(m_vMousePos, m_listLine.Count - 1, m_iLineColor);
                         //2//
                     }
                     //1//
@@ -141,7 +173,7 @@ public class MiniGameCatch : MiniGame
                     if (m_bLastPointInSketchBook.Equals(true))
                     {
                         //1// 선분과 선분 교점 구해서 선 그림
-                        DrawLineWithIntersection(m_listLine.Count - 1);
+                        DrawLineWithIntersection(m_listLine.Count - 1, m_iLineColor);
                         //1//
 
                         // 라인 null
@@ -166,14 +198,11 @@ public class MiniGameCatch : MiniGame
             //2// 라인 생성되었으면 선 그림
             if (m_line != null)
             {
-                m_line.UpdateLine(m_vMousePos, m_listLine.Count - 1);
+                m_line.UpdateLine(m_vMousePos, m_listLine.Count - 1, m_iLineColor);
             }
             //2//
         }
         //1//
-
-        // 채팅 수 카운팅
-        CountChat();
 
         //2// 대기 팝업 타이머
         if (m_bStartPopupTime)
@@ -295,6 +324,13 @@ public class MiniGameCatch : MiniGame
                     //1//
 
                     m_iIngameLimitTime = ingameTime.iIngameTime;
+
+                    if (_baBuffer.Length > GameData.iReceiveIngameTimePacketStructSize)
+                    {
+                        byte[] baNewArray = ResizeArray(_baBuffer, GameData.iReceiveIngameTimePacketStructSize);
+
+                        IngameManager.m_Instance.Event(baNewArray);
+                    }
                 }
                 break;
 
@@ -311,7 +347,29 @@ public class MiniGameCatch : MiniGame
                     vPoint.x = point.fX;
                     vPoint.y = point.fY;
 
-                    DrawLine(point.iLineIdx, vPoint);
+                    DrawLine(point.iLineIdx, vPoint, point.iColor);
+
+                    ++m_iRecvPointCount;    // 임시
+
+                    if (_baBuffer.Length > GameData.iReceivePointPacketStructSize)
+                    {
+                        byte[] baNewArray = ResizeArray(_baBuffer, GameData.iReceivePointPacketStructSize);
+
+                        IngameManager.m_Instance.Event(baNewArray);
+                    }
+                }
+                break;
+
+            case GameData.EnumGameCatchStructType.RECEIVE_CHAT_PACKET:
+                {
+                    Debug.Log("Receive Chat Packet");
+
+                    //1// 서버에서 받은 패킷 deserializing - 채팅
+                    GameData.ReceiveChatPacket chat = new GameData.ReceiveChatPacket();
+                    chat = Serializer.ByteToStructure<GameData.ReceiveChatPacket>(_baBuffer);
+                    //1//
+
+                    Chat(chat.strChat, chat.iPlayerIdx, chat.iAnswer);
                 }
                 break;
 
@@ -320,25 +378,124 @@ public class MiniGameCatch : MiniGame
         }
     }
 
-    private void Chat()
+    private void SendChat()
     {
-        // 텍스트 박스 크기를 텍스트가 얼마나 들어왔는지에 따라 판별
+        m_sendChatPacket.byteGameType = (byte)m_eGameType;
+        m_sendChatPacket.byteStructType = (byte)GameData.EnumGameCatchStructType.SEND_CHAT_PACKET;
+        m_sendChatPacket.strChat = m_ifChatBox.text;
+
+        byte[] packet = Serializer.StructureToByte(m_sendChatPacket);
+
+        IngameManager.m_Instance.GetClient().SendPacket(packet);
+
+        m_ifChatBox.text = "";
+        m_textChatBoxText.text = "";
+
+        Debug.Log("Send Chat Packet");
     }
 
-    private void DrawLine(int _iLineIdx, Vector2 _vPoint)
+    private byte[] ResizeArray(byte[] _baBuffer, int _iSize)
+    {
+        byte[] baArray = new byte[_baBuffer.Length - _iSize];
+
+        //_baBuffer.CopyTo(baArray, _iSize);
+        Array.Copy(_baBuffer, _iSize, baArray, 0, _baBuffer.Length - _iSize);        
+
+        return baArray;
+    }
+
+    private void Chat(string _strChat, int _iPlayerIdx, int _iAnswer)
+    {
+        //1// 텍스트 박스 크기를 텍스트가 얼마나 들어왔는지에 따라 판별한 후 텍스트 출력
+        m_listTextChatBubble[_iPlayerIdx].text = _strChat;
+
+        float fMaxWidth = 135f;             // 한글 8글자 기준 텍스트 박스 너비
+        float fPreferredHeight = 21f;       // font size 20 기준 텍스트 박스 폭
+        float fAddLengthForField = 5;       // 텍스트를 그려줄 필드(Image)
+        float fAddLegthForBorder = 15;      // 필드를 감싸는 테두리
+
+        if (m_listTextChatBubble[_iPlayerIdx].preferredWidth > fMaxWidth * 3f)                // 텍스트 박스 너비가 135 * 3를 넘겼다면 4줄로 처리
+        {
+            fPreferredHeight *= 4f;
+            m_listTextChatBubble[_iPlayerIdx].gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(fMaxWidth, fPreferredHeight);
+
+            m_listRtChatBubbleField[_iPlayerIdx].sizeDelta = new Vector2(fMaxWidth + fAddLengthForField, fPreferredHeight + fAddLengthForField);
+            m_listRtChatBubbleBorder[_iPlayerIdx].sizeDelta = new Vector2(fMaxWidth + fAddLegthForBorder, fPreferredHeight + fAddLegthForBorder);
+        }
+        else if (m_listTextChatBubble[0].preferredWidth > fMaxWidth * 2f)           // 텍스트 박스 너비가 135 * 2를 넘겼다면 3줄로 처리
+        {
+            fPreferredHeight *= 3f;
+            m_listTextChatBubble[_iPlayerIdx].gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(fMaxWidth, fPreferredHeight);
+
+            m_listRtChatBubbleField[_iPlayerIdx].sizeDelta = new Vector2(fMaxWidth + fAddLengthForField, fPreferredHeight + fAddLengthForField);
+            m_listRtChatBubbleBorder[_iPlayerIdx].sizeDelta = new Vector2(fMaxWidth + fAddLegthForBorder, fPreferredHeight + fAddLegthForBorder);
+        }
+        else if(m_listTextChatBubble[_iPlayerIdx].preferredWidth > fMaxWidth)                 // 텍스트 박스 너비가 135를 넘겼다면 2줄로 처리
+        {
+            fPreferredHeight *= 2f;
+            m_listTextChatBubble[_iPlayerIdx].gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(fMaxWidth, fPreferredHeight);
+
+            m_listRtChatBubbleField[_iPlayerIdx].sizeDelta = new Vector2(fMaxWidth + fAddLengthForField, fPreferredHeight + fAddLengthForField);
+            m_listRtChatBubbleBorder[_iPlayerIdx].sizeDelta = new Vector2(fMaxWidth + fAddLegthForBorder, fPreferredHeight + fAddLegthForBorder);
+        }
+        else                                                                        // 텍스트 박스 너비가 135를 넘기지 않았다면 텍스트 크기만큼 박스 크기 고정
+        {
+            m_listTextChatBubble[_iPlayerIdx].gameObject.GetComponent<RectTransform>().sizeDelta =  new Vector2(m_listTextChatBubble[_iPlayerIdx].preferredWidth, fPreferredHeight);
+
+            m_listRtChatBubbleField[_iPlayerIdx].sizeDelta = new Vector2(m_listTextChatBubble[_iPlayerIdx].preferredWidth + fAddLengthForField, fPreferredHeight + fAddLengthForField);
+            m_listRtChatBubbleBorder[_iPlayerIdx].sizeDelta = new Vector2(m_listTextChatBubble[_iPlayerIdx].preferredWidth + fAddLegthForBorder, fPreferredHeight + fAddLegthForBorder);
+        }
+
+        m_listGoChatBubble[_iPlayerIdx].SetActive(true);
+
+        m_listIsChatBoxOn[_iPlayerIdx] = true;
+        m_listFChatBoxLimitTime[_iPlayerIdx] = 3f;
+        //1//
+
+        //2// 플레이어가 정답을 맞춘 경우
+        //if(_iAnswer.Equals(1))
+        //{
+
+        //}
+        //2//
+    }
+
+    private void ChatBoxOnAndOff()
+    {
+        for (int i = 0; i < m_iPlayerCnt; ++i)
+        {
+            if (m_listIsChatBoxOn[i])
+            {
+                m_listFChatBoxLimitTime[i] -= Time.deltaTime;
+
+                if (m_listFChatBoxLimitTime[i] < 0)
+                {
+                    m_listIsChatBoxOn[i] = false;
+                    m_listFChatBoxLimitTime[i] = 3f;
+                }
+            }
+        }
+    }
+
+    private void DrawLine(int _iLineIdx, Vector2 _vPoint, int _iLineColor)
     {
         if (_iLineIdx > m_listLine.Count - 1)
         {
             GameObject goLine = Instantiate(m_goLinePrefab, m_rtSketchBook.transform);
+            goLine.GetComponent<LineRenderer>().startColor = SetColor(_iLineColor);
+            goLine.GetComponent<LineRenderer>().endColor = SetColor(_iLineColor);
             m_line = goLine.GetComponent<Line>();
             m_listLine.Add(m_line);
 
             Debug.Log("새로운 라인 생성, _iLineIdx : " + _iLineIdx + "_vPoint : " + _vPoint);
+
+            m_iRecvPointCount = 0;
             m_line.SetPoint(_vPoint);
         }
         else
         {
             Debug.Log("기존 라인에 이음, _iLineIdx : " + _iLineIdx + "_vPoint : " + _vPoint);
+
             m_listLine[_iLineIdx].SetPoint(_vPoint);
         }
     }
@@ -347,9 +504,6 @@ public class MiniGameCatch : MiniGame
     {
         m_bRoundStart = true;
         m_goTextExaminer.SetActive(true);
-        m_goRadioGroupColor.SetActive(true);
-        m_goEraseAllButton.SetActive(true);
-        m_goGiveUpButton.SetActive(true);
         m_goIngameTime.SetActive(true);
         m_textRound.gameObject.SetActive(true);
         m_goReserveExitOrCancel.SetActive(true);
@@ -360,10 +514,13 @@ public class MiniGameCatch : MiniGame
                 {
                     m_goRadioGroupAnswer.SetActive(false);
 
+                    SendAnswer();
+
                     m_textAnswer.text = "제시어 : " + m_strAnswer;
                     m_goAnswerText.SetActive(true);
-
-                    SendAnswer();
+                    m_goRadioGroupColor.SetActive(true);
+                    m_goEraseAllButton.SetActive(true);
+                    m_goGiveUpButton.SetActive(true);
                 }
                 break;
 
@@ -413,7 +570,7 @@ public class MiniGameCatch : MiniGame
     }
 
     // 안에서 밖으로 나갈 때 교점 연산 함수 호출
-    private void DrawLineWithIntersection(int _iIdx)
+    private void DrawLineWithIntersection(int _iIdx, int _iLineColor)
     {
         if (m_vPointOutOfSketchBook.x > m_vSketchBookPos.x + m_fSketchBookWidthHalf)
         {
@@ -425,7 +582,7 @@ public class MiniGameCatch : MiniGame
             vAP2.x = m_vSketchBookPos.x + m_fSketchBookWidthHalf;
             vAP2.y = m_vSketchBookPos.y + m_fSketchBookHeightHalf;
 
-            m_line.SetIntersectionPoint(vAP1, vAP2, m_vPointOutOfSketchBook, _iIdx);
+            m_line.SetIntersectionPoint(vAP1, vAP2, m_vPointOutOfSketchBook, _iIdx, _iLineColor);
         }
         else if (m_vPointOutOfSketchBook.x < m_vSketchBookPos.x - m_fSketchBookWidthHalf)
         {
@@ -437,7 +594,7 @@ public class MiniGameCatch : MiniGame
             vAP2.x = m_vSketchBookPos.x - m_fSketchBookWidthHalf;
             vAP2.y = m_vSketchBookPos.y + m_fSketchBookHeightHalf;
 
-            m_line.SetIntersectionPoint(vAP1, vAP2, m_vPointOutOfSketchBook, _iIdx);
+            m_line.SetIntersectionPoint(vAP1, vAP2, m_vPointOutOfSketchBook, _iIdx, _iLineColor);
         }
 
         if (m_vPointOutOfSketchBook.y > m_vSketchBookPos.y + m_fSketchBookHeightHalf)
@@ -450,7 +607,7 @@ public class MiniGameCatch : MiniGame
             vAP2.x = m_vSketchBookPos.x + m_fSketchBookWidthHalf;
             vAP2.y = m_vSketchBookPos.y + m_fSketchBookHeightHalf;
 
-            m_line.SetIntersectionPoint(vAP1, vAP2, m_vPointOutOfSketchBook, _iIdx);
+            m_line.SetIntersectionPoint(vAP1, vAP2, m_vPointOutOfSketchBook, _iIdx, _iLineColor);
         }
         else if (m_vPointOutOfSketchBook.y < m_vSketchBookPos.y - m_fSketchBookHeightHalf)
         {
@@ -462,12 +619,12 @@ public class MiniGameCatch : MiniGame
             vAP2.x = m_vSketchBookPos.x + m_fSketchBookWidthHalf;
             vAP2.y = m_vSketchBookPos.y - m_fSketchBookHeightHalf;
 
-            m_line.SetIntersectionPoint(vAP1, vAP2, m_vPointOutOfSketchBook, _iIdx);
+            m_line.SetIntersectionPoint(vAP1, vAP2, m_vPointOutOfSketchBook, _iIdx, _iLineColor);
         }
     }
 
     // 밖에서 안으로 들어올 때 교점 연산 함수 호출
-    private void DrawLineWithIntersection(Vector2 _vPointInSketchBook, int _iIdx)
+    private void DrawLineWithIntersection(Vector2 _vPointInSketchBook, int _iIdx, int _iLineColor)
     {
         if (m_vPointOutOfSketchBook.x > m_vSketchBookPos.x + m_fSketchBookWidthHalf)
         {
@@ -479,7 +636,7 @@ public class MiniGameCatch : MiniGame
             vAP2.x = m_vSketchBookPos.x + m_fSketchBookWidthHalf;
             vAP2.y = m_vSketchBookPos.y + m_fSketchBookHeightHalf;
 
-            m_line.SetIntersectionPoint(vAP1, vAP2, m_vPointOutOfSketchBook, _vPointInSketchBook, _iIdx);
+            m_line.SetIntersectionPoint(vAP1, vAP2, m_vPointOutOfSketchBook, _vPointInSketchBook, _iIdx, _iLineColor);
         }
         else if (m_vPointOutOfSketchBook.x < m_vSketchBookPos.x - m_fSketchBookWidthHalf)
         {
@@ -491,7 +648,7 @@ public class MiniGameCatch : MiniGame
             vAP2.x = m_vSketchBookPos.x - m_fSketchBookWidthHalf;
             vAP2.y = m_vSketchBookPos.y + m_fSketchBookHeightHalf;
 
-            m_line.SetIntersectionPoint(vAP1, vAP2, m_vPointOutOfSketchBook, _vPointInSketchBook, _iIdx);
+            m_line.SetIntersectionPoint(vAP1, vAP2, m_vPointOutOfSketchBook, _vPointInSketchBook, _iIdx, _iLineColor);
         }
 
         if (m_vPointOutOfSketchBook.y > m_vSketchBookPos.y + m_fSketchBookHeightHalf)
@@ -504,7 +661,7 @@ public class MiniGameCatch : MiniGame
             vAP2.x = m_vSketchBookPos.x + m_fSketchBookWidthHalf;
             vAP2.y = m_vSketchBookPos.y + m_fSketchBookHeightHalf;
 
-            m_line.SetIntersectionPoint(vAP1, vAP2, m_vPointOutOfSketchBook, _vPointInSketchBook, _iIdx);
+            m_line.SetIntersectionPoint(vAP1, vAP2, m_vPointOutOfSketchBook, _vPointInSketchBook, _iIdx, _iLineColor);
         }
         else if (m_vPointOutOfSketchBook.y < m_vSketchBookPos.y - m_fSketchBookHeightHalf)
         {
@@ -516,7 +673,7 @@ public class MiniGameCatch : MiniGame
             vAP2.x = m_vSketchBookPos.x + m_fSketchBookWidthHalf;
             vAP2.y = m_vSketchBookPos.y - m_fSketchBookHeightHalf;
 
-            m_line.SetIntersectionPoint(vAP1, vAP2, m_vPointOutOfSketchBook, _vPointInSketchBook, _iIdx);
+            m_line.SetIntersectionPoint(vAP1, vAP2, m_vPointOutOfSketchBook, _vPointInSketchBook, _iIdx, _iLineColor);
         }
     }
 
@@ -528,6 +685,15 @@ public class MiniGameCatch : MiniGame
                 m_listPlayerInfo.Add(m_goPosition1);
                 m_listPlayerInfo.Add(m_goPosition2);
 
+                m_listIsChatBoxOn = new List<bool>();
+                m_listFChatBoxLimitTime = new List<float>();
+
+                m_listIsChatBoxOn.Add(false);
+                m_listIsChatBoxOn.Add(false);
+
+                m_listFChatBoxLimitTime.Add(3f);
+                m_listFChatBoxLimitTime.Add(3f);
+
                 m_goPosition1.SetActive(true);
                 m_goPosition2.SetActive(true);
                 break;
@@ -537,6 +703,14 @@ public class MiniGameCatch : MiniGame
                 m_listPlayerInfo.Add(m_goPosition2);
                 m_listPlayerInfo.Add(m_goPosition3);
 
+                m_listIsChatBoxOn.Add(false);
+                m_listIsChatBoxOn.Add(false);
+                m_listIsChatBoxOn.Add(false);
+
+                m_listFChatBoxLimitTime.Add(3f);
+                m_listFChatBoxLimitTime.Add(3f);
+                m_listFChatBoxLimitTime.Add(3f);
+                
                 m_goPosition1.SetActive(true);
                 m_goPosition2.SetActive(true);
                 m_goPosition3.SetActive(true);
@@ -547,6 +721,16 @@ public class MiniGameCatch : MiniGame
                 m_listPlayerInfo.Add(m_goPosition2);
                 m_listPlayerInfo.Add(m_goPosition3);
                 m_listPlayerInfo.Add(m_goPosition4);
+
+                m_listIsChatBoxOn.Add(false);
+                m_listIsChatBoxOn.Add(false);
+                m_listIsChatBoxOn.Add(false);
+                m_listIsChatBoxOn.Add(false);
+
+                m_listFChatBoxLimitTime.Add(3f);
+                m_listFChatBoxLimitTime.Add(3f);
+                m_listFChatBoxLimitTime.Add(3f);
+                m_listFChatBoxLimitTime.Add(3f);
 
                 m_goPosition1.SetActive(true);
                 m_goPosition2.SetActive(true);
@@ -560,6 +744,18 @@ public class MiniGameCatch : MiniGame
                 m_listPlayerInfo.Add(m_goPosition3);
                 m_listPlayerInfo.Add(m_goPosition4);
                 m_listPlayerInfo.Add(m_goPosition5);
+
+                m_listIsChatBoxOn.Add(false);
+                m_listIsChatBoxOn.Add(false);
+                m_listIsChatBoxOn.Add(false);
+                m_listIsChatBoxOn.Add(false);
+                m_listIsChatBoxOn.Add(false);
+
+                m_listFChatBoxLimitTime.Add(3f);
+                m_listFChatBoxLimitTime.Add(3f);
+                m_listFChatBoxLimitTime.Add(3f);
+                m_listFChatBoxLimitTime.Add(3f);
+                m_listFChatBoxLimitTime.Add(3f);
 
                 m_goPosition1.SetActive(true);
                 m_goPosition2.SetActive(true);
@@ -575,6 +771,20 @@ public class MiniGameCatch : MiniGame
                 m_listPlayerInfo.Add(m_goPosition4);
                 m_listPlayerInfo.Add(m_goPosition5);
                 m_listPlayerInfo.Add(m_goPosition6);
+
+                m_listIsChatBoxOn.Add(false);
+                m_listIsChatBoxOn.Add(false);
+                m_listIsChatBoxOn.Add(false);
+                m_listIsChatBoxOn.Add(false);
+                m_listIsChatBoxOn.Add(false);
+                m_listIsChatBoxOn.Add(false);
+
+                m_listFChatBoxLimitTime.Add(3f);
+                m_listFChatBoxLimitTime.Add(3f);
+                m_listFChatBoxLimitTime.Add(3f);
+                m_listFChatBoxLimitTime.Add(3f);
+                m_listFChatBoxLimitTime.Add(3f);
+                m_listFChatBoxLimitTime.Add(3f);
 
                 m_goPosition1.SetActive(true);
                 m_goPosition2.SetActive(true);
@@ -595,5 +805,97 @@ public class MiniGameCatch : MiniGame
         m_bStartAnswerPopupTime = false;
         m_bStartChoiceAnswerPopupTime = false;
         m_bStartExaminerExitPopupTime = false;
+    }
+
+    private Color SetColor(int _iColorData)
+    {
+        Color color = new Color();
+
+        switch (_iColorData)
+        {
+            case (int)GameData.EnumLineColor.BLACK:
+                color = Color.black;
+                break;
+
+            case (int)GameData.EnumLineColor.WHITE:
+                color = Color.white;
+                break;
+
+            case (int)GameData.EnumLineColor.RED:
+                color = Color.red;
+                break;
+
+            case (int)GameData.EnumLineColor.ORANGE:
+                color = new Color(1, 0.5f, 0, 1);
+                break;
+
+            case (int)GameData.EnumLineColor.YELLOW:
+                color = Color.yellow;
+                break;
+
+            case (int)GameData.EnumLineColor.GREEN:
+                color = Color.green;
+                break;
+
+            case (int)GameData.EnumLineColor.BLUE:
+                color = Color.blue;
+                break;
+
+            case (int)GameData.EnumLineColor.PURPLE:
+
+                float fR = (float)98 / 255;
+                float fG = (float)27 / 255;
+                float fB = (float)155 / 255;
+
+                color = new Color(fR, fG, fB);
+                break;
+        }
+
+        return color;
+    }
+
+    public void SetLineColorBlack()
+    {
+        m_iLineColor = (int)GameData.EnumLineColor.BLACK;
+    }
+
+    public void SetLineColorWhite()
+    {
+        m_iLineColor = (int)GameData.EnumLineColor.WHITE;
+    }
+
+    public void SetLineColorRed()
+    {
+        m_iLineColor = (int)GameData.EnumLineColor.RED;
+    }
+
+    public void SetLineColorOrange()
+    {
+        m_iLineColor = (int)GameData.EnumLineColor.ORANGE;
+    }
+
+    public void SetLineColorYellow()
+    {
+        m_iLineColor = (int)GameData.EnumLineColor.YELLOW;
+    }
+
+    public void SetLineColorGreen()
+    {
+        m_iLineColor = (int)GameData.EnumLineColor.GREEN;
+    }
+
+    public void SetLineColorBlue()
+    {
+        m_iLineColor = (int)GameData.EnumLineColor.BLUE;
+    }
+
+    public void SetLineColorPurple()
+    {
+        m_iLineColor = (int)GameData.EnumLineColor.PURPLE;
+    }
+
+    public void ExitGameCatch()
+    {
+        ExitGame(m_eGameType);
     }
 }

@@ -254,12 +254,16 @@ public class chatBox : MonoBehaviour
         string curChatText = string.Empty;
         Color color = Color.white;
         ScrollRect curRect = null;
+        string srcName = "";
+        string clientUserNickname = GameManager.m_Instance.getUserNickName();
         switch (data.m_socialType)
         {
             case SocialPacketType.packetTypeSocialChatNormalResponse:
                 C_SocialPacketChatNormalResponse curData = (C_SocialPacketChatNormalResponse)data;
                 curParent = m_chatBoxParentRectTransform_All;
                 curChatText = curData.m_nickname+ " : " + curData.m_message;
+                if(clientUserNickname != curData.m_nickname)
+                    srcName = curData.m_nickname;
                 curRect = m_scrollRect_All;
                 if (m_curChatType != CHAT_TYPE.ALL_CHAT)
                     m_NewIcon_AllTab.SetActive(true);
@@ -269,12 +273,13 @@ public class chatBox : MonoBehaviour
                 curParent = m_chatBoxParentRectTransform_Whisper;
                 if(curFriendData.m_bIsSender)
                 {
-                    curChatText = GameManager.m_Instance.getUserNickName() + "->" + curFriendData.m_srcName + " : ";
+                    curChatText = curFriendData.m_srcName + "에게 : ";
                     color = Color.red;
                 }
                 else
                 {
-                    curChatText = curFriendData.m_srcName + "->" + GameManager.m_Instance.getUserNickName() + " : ";
+                    srcName = curFriendData.m_srcName;
+                    curChatText = curFriendData.m_srcName + " : ";
                     if(m_curChatType != CHAT_TYPE.WHISPER_CHAT)     // 채팅 탭이 현재 같은 타입 아니라면 new icon
                         m_NewIcon_WhisperTab.SetActive(true);       // 유저가 쓴 귓속말이 아니면 new icon
                     color = Color.green;
@@ -291,7 +296,7 @@ public class chatBox : MonoBehaviour
                 break;
         }
         textController curTextController = Instantiate(m_TextPrefab, curParent).GetComponent<textController>();
-        curTextController.setText(curChatText, color);
+        curTextController.setText(srcName, curChatText, color, setWhisper);
         m_TextList.Add(curTextController.gameObject);
         curParent.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 10 + m_TextList.Count * m_offset_Y);
         curRect.normalizedPosition = Vector2.zero;
@@ -332,11 +337,7 @@ public class chatBox : MonoBehaviour
     /// <param name="nickname"></param>
     public void setWhisper(string nickname)
     {
-        if (m_bNowWhisper)
-        {
-            return;
-        }
-        m_chatIF.text = "/w " + nickname+" " + m_chatIF.text;
+        m_chatIF.text = "/w " + nickname+" ";
         m_chatIF.ActivateInputField();
     }
 }

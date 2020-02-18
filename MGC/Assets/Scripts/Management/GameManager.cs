@@ -103,7 +103,8 @@ public class GameManager : MonoBehaviour {
                 m_socketMGR.updateManager();
             if (m_uiMGR)
                 m_uiMGR.updateManager();
-            //m_ingameMGR.updateManager();
+            if(m_ingameMGR && m_bNowInGame)
+                m_ingameMGR.updateManager();
             if (m_inputKeyMGR)
                 ((inputKeyManager)m_inputKeyMGR).checkInputKey();
         }
@@ -354,6 +355,8 @@ public class GameManager : MonoBehaviour {
             else
             {
                 // wait connect ui open
+                if(m_bNowInGame)
+                    openOutGameUI();
                 anomalyType = AnomalyType.mainServer_Disconnect;
                 setLoginState(false);
             }
