@@ -65,16 +65,11 @@ public class uiManager : management
     /// <summary>
     /// 채널 변경(게임 서버변경)에 따른 UI작업
     /// </summary>
-    public void goLobbyUI(object roomInfo)
+    public void goLobbyUI(S_GameRoomInfo roomInfo)
     {
         ((controllerUI)m_uiController).goLobbyUI(roomInfo);
     }
-
-
-    public void testFunc()
-    {
-        ((controllerUI)m_uiController).openInviteInfoUI();
-    }
+    
 
     #endregion
 

@@ -15,15 +15,15 @@ namespace PACKET
 
     public struct S_UserAccessData
     {
-        public string m_accessID;
-        public string m_accessPW;
+        public string       m_accessID;
+        public string       m_accessPW;
     }
 
     public struct S_Channel
     {
-        public string m_channelName;
-        public Int32 m_nNumberOfPeople;
-        public Int32 m_nLimitOfPeople;
+        public string       m_channelName;
+        public Int32        m_nNumberOfPeople;
+        public Int32        m_nLimitOfPeople;
         public S_Channel(string name, int num, int limit)
         {
             m_channelName = name;
@@ -51,11 +51,11 @@ namespace PACKET
 
     public struct S_RoomUserInfo
     {
-        public Int16 m_nSlotIndex; // 1부터 시작됨
-        public bool m_bIsMaster;
-        public string m_userNickname;
-        public Int32 m_nCharacterImageIndex;
-        public bool m_bReadyState;
+        public Int16        m_nSlotIndex; // 1부터 시작됨
+        public bool         m_bIsMaster;
+        public string       m_userNickname;
+        public Int32        m_nCharacterImageIndex;
+        public bool         m_bReadyState;
 
         public S_RoomUserInfo(int nSlotIndex, string userNickname, int nCharacterImageIndex, bool bReadyState, bool bIsMaster)
         {
@@ -69,9 +69,9 @@ namespace PACKET
 
     public struct S_UserData
     {
-        public UInt32 m_gpID;
-        public string m_nickName;
-        public string m_channelName;
+        public UInt32       m_gpID;
+        public string       m_nickName;
+        public string       m_channelName;
     }
 
     #endregion
@@ -86,6 +86,21 @@ namespace PACKET
         public bool         m_bIsOnLine;
     }
 
+    public struct S_GameRoomInfo
+    {
+        public short        m_nRoomNUM;
+        public string       m_roomName;
+        public RoomGameType m_gameMode;
+        public short        m_nMaxPlayer;
+        public short        m_nCurPlayer;
+    }
+
+    public struct S_GameServerInfo
+    {
+        public string       m_ip;
+        public int          m_nPort;
+        public string       m_channelName;
+    }
 
     #endregion
 

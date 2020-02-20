@@ -139,8 +139,9 @@ namespace PACKET
         packetTypeSocialAcceptFriendResponse,
         packetTypeSocialFriendListRequest, //친구 리스트
         packetTypeSocialFriendListResponse,
-
-        packetTypeSocialInviteGameRoom,
+        packetTypeSocialInviteFriendRequest, //친구 게임 초대
+        packetTypeSocialInviteFriendResponse,
+        packetTypeSocialConfirmInviteFriendRequest, //Social -> Game -> client 참가 여부 묻기 위한 패킷
 
         packetTypeSocialCount,
     }

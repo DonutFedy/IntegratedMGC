@@ -13,10 +13,8 @@ public class inviteUI : UI
     [SerializeField]
     Text                m_srcUserNameText;
 
-    object              m_roomInfo;
-    string              m_changeIP = "";
-    int                 m_nChangePort = 0;
-    string              m_changeChannelName = "";
+    S_GameRoomInfo      m_roomInfo;
+    S_GameServerInfo    m_gameServerInfo;
 
     #region Basic UI
 
@@ -59,18 +57,16 @@ public class inviteUI : UI
     /// <summary>
     /// 초대 UI 를 열기 전에 세팅
     /// </summary>
-    public void setInviteInfo()
+    public void setInviteInfo(C_SocialPacketConfirmInviteFriendRequest data)
     {
         // setting data
-        m_roomInfo = null;
-        m_changeIP = "127.0.0.1";
-        m_nChangePort = 10011;
-        m_changeChannelName = "테스트채널";
+        m_roomInfo          = data.m_gameroomInfo;
+        m_gameServerInfo    = data.m_gameServerInfo;
 
         // ui set
-        m_gameRoomNameText.text ="";
-        m_gameTypeText.text = "";
-        m_srcUserNameText.text = "";
+        m_gameRoomNameText.text         = m_roomInfo.m_roomName;
+        m_gameTypeText.text             = myApi.GetDescription( m_roomInfo.m_gameMode );
+        m_srcUserNameText.text          = data.m_friendName;
     }
 
     #endregion
@@ -80,7 +76,7 @@ public class inviteUI : UI
 
     public void clickAcceptanceBTN()
     {
-        GameManager.m_Instance.changeMainServer(m_changeIP, m_nChangePort, m_changeChannelName, m_roomInfo);
+        GameManager.m_Instance.changeMainServer(m_gameServerInfo, m_roomInfo);
     }
 
 

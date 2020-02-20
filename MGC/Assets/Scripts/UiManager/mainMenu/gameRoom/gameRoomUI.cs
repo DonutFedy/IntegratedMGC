@@ -63,7 +63,16 @@ public class gameRoomUI : UI
         if (eventData.m_basicType == BasePacketType.basePacketTypeSocial)
         {
             responseChat(eventData);
+
+            // invite response 패킷 처리해야함
+            if (eventData.getSubType() == (int)SocialPacketType.packetTypeSocialInviteFriendResponse)
+            {
+                responseInviteResponse(eventData);
+                return;
+            }
         }
+
+
         // 만약 서브 ui가 열려있다면 그쪽으로 throw
         isExistSubUI(eventData);
         m_listener?.Invoke(eventData);
@@ -326,7 +335,11 @@ public class gameRoomUI : UI
 
     }
 
-
+    void responseInviteResponse(C_BasePacket eventData)
+    {
+        ((ResultUI)m_uiList[(int)INDEX_OF_GAMEROOM_UI.RESULT_UI]).setResultMSG("친구를 초대할 수 없습니다.");
+        openUI((int)INDEX_OF_GAMEROOM_UI.RESULT_UI,true);
+    }
 
     #endregion
 
@@ -334,6 +347,7 @@ public class gameRoomUI : UI
     #region UI OPEN/CLOSE
     public void openInviteListUI()
     {
+        ((inviteListUI)m_uiList[(int)INDEX_OF_GAMEROOM_UI.INVITE_UI]).setCurrentGameroomMember(m_userInfoList);
         openUI((int)INDEX_OF_GAMEROOM_UI.INVITE_UI);
     }
 

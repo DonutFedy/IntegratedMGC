@@ -1127,6 +1127,95 @@ namespace PACKET
         }
     }
 
+    public class C_SocialPacketInviteFriendRequest : C_BaseSocialPacket
+    {
+        public string               m_friendName;
+        public C_SocialPacketInviteFriendRequest()
+        {
+            setType(SocialPacketType.packetTypeSocialInviteFriendRequest);
+            m_bResponse = false;
+        }
+        public override void deserialize(C_Buffer buf)
+        {
+            buf.get(ref m_friendName);
+        }
+
+        public override C_Buffer serialize()
+        {
+            C_Buffer buf = new C_Buffer();
+            buf.set((byte)m_basicType);
+            buf.set((byte)m_socialType);
+            buf.set(m_friendName);
+            return buf;
+        }
+    }
+    public class C_SocialPacketFriendInviteResponse : C_BaseSocialPacket
+    {
+
+        public bool         m_bIsSuccess = false;
+        public C_SocialPacketFriendInviteResponse()
+        {
+            setType(SocialPacketType.packetTypeSocialInviteFriendResponse);
+            m_bResponse = true;
+        }
+        public override void deserialize(C_Buffer buf)
+        {
+            buf.get(ref m_bIsSuccess);
+        }
+
+        public override C_Buffer serialize()
+        {
+            C_Buffer buf = new C_Buffer();
+            buf.set((byte)m_basicType);
+            buf.set((byte)m_socialType);
+            buf.set(m_bIsSuccess);
+            return buf;
+        }
+    }
+
+
+    public class C_SocialPacketConfirmInviteFriendRequest : C_BaseSocialPacket
+    {
+        public string               m_friendName;
+        public S_GameServerInfo     m_gameServerInfo;
+        public S_GameRoomInfo       m_gameroomInfo;
+        public C_SocialPacketConfirmInviteFriendRequest()
+        {
+            setType(SocialPacketType.packetTypeSocialConfirmInviteFriendRequest);
+            m_bResponse = true;
+        }
+        public override void deserialize(C_Buffer buf)
+        {
+            buf.get(ref m_friendName);
+            buf.get(ref m_gameServerInfo.m_ip);
+            buf.get(ref m_gameServerInfo.m_nPort);
+            buf.get(ref m_gameServerInfo.m_channelName);
+            buf.get(ref m_gameroomInfo.m_nRoomNUM);
+            buf.get(ref m_gameroomInfo.m_roomName);
+            buf.get(ref m_gameroomInfo.m_gameMode);
+            buf.get(ref m_gameroomInfo.m_nMaxPlayer);
+            buf.get(ref m_gameroomInfo.m_nCurPlayer);
+        }
+
+        public override C_Buffer serialize()
+        {
+            C_Buffer buf = new C_Buffer();
+            buf.set((byte)m_basicType);
+            buf.set((byte)m_socialType);
+            buf.set(m_friendName);
+            buf.set(m_gameServerInfo.m_ip);
+            buf.set(m_gameServerInfo.m_nPort);
+            buf.set(m_gameServerInfo.m_channelName);
+            buf.set(m_gameroomInfo.m_nRoomNUM);
+            buf.set(m_gameroomInfo.m_roomName);
+            buf.set(m_gameroomInfo.m_gameMode);
+            buf.set(m_gameroomInfo.m_nMaxPlayer);
+            buf.set(m_gameroomInfo.m_nCurPlayer);
+            return buf;
+        }
+    }
+
+
 
     #endregion
     public class C_Anomaly : C_BasePacket

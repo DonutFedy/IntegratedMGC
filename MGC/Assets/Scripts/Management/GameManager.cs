@@ -307,18 +307,18 @@ public class GameManager : MonoBehaviour {
         m_socketMGR.disconnect_mainServer();
         setConnectStateMainServer(false, false);
     }
-    public void changeMainServer(string changeIp, int changePort, string changedChannelName, object roomInfo)
+    public void changeMainServer(S_GameServerInfo serverInfo, S_GameRoomInfo roomInfo)
     {
-        if( m_main_serverIP == changeIp && m_nMain_PortNUM == changePort) // 같은 채널이면 로비변경 및 기존 로직
+        if( m_main_serverIP == serverInfo.m_ip && m_nMain_PortNUM == serverInfo.m_nPort ) // 같은 채널이면 로비변경 및 기존 로직
         {
             goLobbyUI(roomInfo);
             return;
         }
         disconnect_mainServer();
-        setMainServerInfo(changeIp, changePort);
+        setMainServerInfo(serverInfo.m_ip, serverInfo.m_nPort);
         if(connect_mainServer())
         {
-            setChannelName(changedChannelName);
+            setChannelName(serverInfo.m_channelName);
             goLobbyUI(roomInfo);
         }
     }
@@ -560,7 +560,7 @@ public class GameManager : MonoBehaviour {
     /// <summary>
     /// 현재 모든 UI를 닫고 로비 UI로 넘어간다.
     /// </summary>
-    void goLobbyUI( object roomInfo)
+    void goLobbyUI( S_GameRoomInfo roomInfo)
     {
         m_uiMGR.goLobbyUI(roomInfo);
     }

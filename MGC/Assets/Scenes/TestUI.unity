@@ -16698,8 +16698,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1307475590}
-  - {fileID: 1275859402}
   - {fileID: 1384150763}
+  - {fileID: 1275859402}
   m_Father: {fileID: 977113362}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -32485,7 +32485,7 @@ RectTransform:
   - {fileID: 818161365}
   - {fileID: 455687237}
   m_Father: {fileID: 590542839}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -35384,7 +35384,7 @@ RectTransform:
   - {fileID: 692161332}
   - {fileID: 395952232}
   m_Father: {fileID: 590542839}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -35406,6 +35406,11 @@ MonoBehaviour:
   m_uiList: []
   m_uiManager: {fileID: 0}
   m_waitingUI: {fileID: 0}
+  m_friendSlotPrefabs: {fileID: 4796021859769184597, guid: f8ac1a5ff8a1bc84d9c3d7d2eae2e4a5,
+    type: 3}
+  m_ParentOfFriendSlot: {fileID: 1524431741}
+  m_SlotSizeOffsetY: 100
+  m_emptyFriendOBJ: {fileID: 493332176}
 --- !u!1 &1386676455
 GameObject:
   m_ObjectHideFlags: 0

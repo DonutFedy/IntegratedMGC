@@ -1,4 +1,4 @@
-﻿//#define NOTLOGINSERVER
+﻿#define NOTLOGINSERVER
 #define IGNORLOGIN
 
 using PACKET;
@@ -71,18 +71,21 @@ public class controllerUI : UI
             onAnomalyEvnet(eventData);
             return;
         }
-        else if(eventData.m_basicType == BasePacketType.basePacketTypeSocial && eventData.getSubType() == (int)SocialPacketType.packetTypeSocialInviteGameRoom)
+        else if(eventData.m_basicType == BasePacketType.basePacketTypeSocial && eventData.getSubType() == (int)SocialPacketType.packetTypeSocialConfirmInviteFriendRequest)
         {
-            // casting data....
-            openInviteInfoUI(/* something data .... */);
+            openInviteInfoUI(eventData);
+            return;
         }
         isExistSubUI(eventData);
     }
 
-    public void openInviteInfoUI(object data =null)
+    public void openInviteInfoUI(C_BasePacket eventData)
     {
+        // casting data....
+        C_SocialPacketConfirmInviteFriendRequest data = (C_SocialPacketConfirmInviteFriendRequest)eventData;
+
         // set invite Ui
-        ((inviteUI)m_uiList[(int)INDEX_OF_CONTROLLER_UI.INVITE_UI]).setInviteInfo(/* something data .... */);
+        ((inviteUI)m_uiList[(int)INDEX_OF_CONTROLLER_UI.INVITE_UI]).setInviteInfo(data);
         // open invite ui
         openUI((int)INDEX_OF_CONTROLLER_UI.INVITE_UI, true);
     }
@@ -129,17 +132,23 @@ public class controllerUI : UI
     }
 
 
-    public void goLobbyUI(object roomInfoTemp)
+    public void goLobbyUI(S_GameRoomInfo roomInfo)
     {
         while (m_uiIndexStack.Count > 1)
         {
             closeUI(1);
         }
         openUI((int)INDEX_OF_CONTROLLER_UI.MAINMENU_UI);
-        S_RoomInfo roomInfo = new S_RoomInfo();
+        S_RoomInfo curRoomInfo = new S_RoomInfo();
+        curRoomInfo.m_number            = roomInfo.m_nRoomNUM;
+        curRoomInfo.m_roomName          = roomInfo.m_roomName;
+        curRoomInfo.m_maxPlayerCount    = roomInfo.m_nMaxPlayer;
+        curRoomInfo.m_playerCount       = roomInfo.m_nCurPlayer;
+        curRoomInfo.m_roomGameType      = roomInfo.m_gameMode;
+        curRoomInfo.m_password          = false;
         // roomInfo setting......
 
-        ((mainMenuUI)m_uiList[(int)INDEX_OF_CONTROLLER_UI.MAINMENU_UI]).openShowRoomInfoUI(roomInfo);
+        ((mainMenuUI)m_uiList[(int)INDEX_OF_CONTROLLER_UI.MAINMENU_UI]).openShowRoomInfoUI(curRoomInfo);
     }
     
 

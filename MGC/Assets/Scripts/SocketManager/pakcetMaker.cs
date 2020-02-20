@@ -503,6 +503,12 @@ namespace PACKET
                 case SocialPacketType.packetTypeSocialFriendListResponse:
                     packet = new C_SocialPacketFriendListResponse();
                     break;
+                case SocialPacketType.packetTypeSocialInviteFriendResponse:
+                    packet = new C_SocialPacketFriendInviteResponse();
+                    break;
+                case SocialPacketType.packetTypeSocialConfirmInviteFriendRequest:
+                    packet = new C_SocialPacketConfirmInviteFriendRequest();
+                    break;
                 case SocialPacketType.packetTypeSocialCount:
                     break;
             }
