@@ -88,18 +88,17 @@ namespace PACKET
 
     public struct S_GameRoomInfo
     {
-        public short        m_nRoomNUM;
+        public int          m_nRoomNUM;
         public string       m_roomName;
         public RoomGameType m_gameMode;
-        public short        m_nMaxPlayer;
-        public short        m_nCurPlayer;
+        public Int64        m_nCreateTime;
+        public int          m_nMaxCount;
     }
 
     public struct S_GameServerInfo
     {
         public string       m_ip;
         public int          m_nPort;
-        public string       m_channelName;
     }
 
     #endregion

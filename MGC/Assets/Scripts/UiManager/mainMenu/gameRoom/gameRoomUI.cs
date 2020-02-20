@@ -337,7 +337,12 @@ public class gameRoomUI : UI
 
     void responseInviteResponse(C_BasePacket eventData)
     {
-        ((ResultUI)m_uiList[(int)INDEX_OF_GAMEROOM_UI.RESULT_UI]).setResultMSG("친구를 초대할 수 없습니다.");
+        C_SocialPacketFriendInviteResponse data = (C_SocialPacketFriendInviteResponse)eventData;
+
+        if(data.m_bIsSuccess)
+            ((ResultUI)m_uiList[(int)INDEX_OF_GAMEROOM_UI.RESULT_UI]).setResultMSG("친구를 초대 했습니다.");
+        else
+            ((ResultUI)m_uiList[(int)INDEX_OF_GAMEROOM_UI.RESULT_UI]).setResultMSG("친구를 초대할 수 없습니다.");
         openUI((int)INDEX_OF_GAMEROOM_UI.RESULT_UI,true);
     }
 

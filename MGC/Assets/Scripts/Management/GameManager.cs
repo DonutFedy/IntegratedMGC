@@ -318,7 +318,7 @@ public class GameManager : MonoBehaviour {
         setMainServerInfo(serverInfo.m_ip, serverInfo.m_nPort);
         if(connect_mainServer())
         {
-            setChannelName(serverInfo.m_channelName);
+            //setChannelName(serverInfo.m_channelName);
             goLobbyUI(roomInfo);
         }
     }

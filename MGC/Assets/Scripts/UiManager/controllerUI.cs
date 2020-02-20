@@ -1,4 +1,4 @@
-﻿#define NOTLOGINSERVER
+﻿//#define NOTLOGINSERVER
 #define IGNORLOGIN
 
 using PACKET;
@@ -140,11 +140,11 @@ public class controllerUI : UI
         }
         openUI((int)INDEX_OF_CONTROLLER_UI.MAINMENU_UI);
         S_RoomInfo curRoomInfo = new S_RoomInfo();
-        curRoomInfo.m_number            = roomInfo.m_nRoomNUM;
+        curRoomInfo.m_number            = (short)roomInfo.m_nRoomNUM;
         curRoomInfo.m_roomName          = roomInfo.m_roomName;
-        curRoomInfo.m_maxPlayerCount    = roomInfo.m_nMaxPlayer;
-        curRoomInfo.m_playerCount       = roomInfo.m_nCurPlayer;
         curRoomInfo.m_roomGameType      = roomInfo.m_gameMode;
+        curRoomInfo.m_nCreateTime       = roomInfo.m_nCreateTime;
+        curRoomInfo.m_maxPlayerCount    = (short)roomInfo.m_nMaxCount;
         curRoomInfo.m_password          = false;
         // roomInfo setting......
 

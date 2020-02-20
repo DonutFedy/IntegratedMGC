@@ -21,6 +21,7 @@ public class selectChannelUI : UI
     Scrollbar           m_scrollbar;
 
     int                 m_nSelectChannelIndex;
+    string              m_nSelectChannelName;
 
     public float        m_default_sizeX;
     public float        m_offset_sizeY;
@@ -106,6 +107,7 @@ public class selectChannelUI : UI
     void selectChannel(int nChannelIndex)
     {
         m_nSelectChannelIndex = nChannelIndex;
+        m_nSelectChannelName = m_ChannelList[m_nSelectChannelIndex].getChannelName();
         tryEnterChannel();
     }
 
@@ -116,7 +118,7 @@ public class selectChannelUI : UI
     {
         startWaiting(responseEnterChannel);
         C_ChannelInRequestPacket eventData = new C_ChannelInRequestPacket();
-        eventData.m_nChannelNumber = (byte)m_nSelectChannelIndex;
+        eventData.m_nChannelName = m_nSelectChannelName;
         GameManager.m_Instance.makePacket(eventData);
     }
 
