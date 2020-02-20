@@ -68,9 +68,6 @@ public class IngameManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
-        m_eventBuffer = EventBuffer.m_Instance;
-        
     }
 
     // GameType, StructType 4byte(int)로 판별했을 때 사용
@@ -401,6 +398,16 @@ public class IngameManager : MonoBehaviour
         // 게임 준비 완료 패킷 전송
         SendInGameReady(GameData.EnumGameType.TWENTY);
     }
+
+    private void OnDisable()
+    {
+        if(m_goGameTwenty != null)
+        {
+            DestroyImmediate(m_goGameTwenty);
+        }
+    }
+
+
 
     private void LoadGameCatch(byte[] _baBuffer)
     {

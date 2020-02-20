@@ -100,7 +100,7 @@ public class Line : MonoBehaviour
 
         byte[] packet = Serializer.StructureToByte(point);
 
-        IngameManager.m_Instance.GetClient().SendPacket(packet);
+        GameManager.m_Instance.makePacket(packet);
 
         Debug.Log("Send Point Packet, _vPoint : " + _vPoint);
 

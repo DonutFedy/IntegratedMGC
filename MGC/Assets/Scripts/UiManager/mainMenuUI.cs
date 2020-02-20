@@ -23,6 +23,12 @@ public class mainMenuUI : UI
     
     bool                        m_bLoadingData;
 
+    [SerializeField]
+    Text                        m_userNicknameText;
+    [SerializeField]
+    Text                        m_channelText;
+
+
     #region RoomLIST
     [SerializeField]
     RectTransform               m_roomListParent;
@@ -173,7 +179,11 @@ public class mainMenuUI : UI
         else
             requestRoomList(m_nCurPageNUM);
     }
-
+    void setUserInfoZone(string nickname, string channelName)
+    {
+        m_userNicknameText.text = nickname;
+        m_channelText.text = channelName;
+    }
     #endregion
 
     #region BTN Event
@@ -193,11 +203,16 @@ public class mainMenuUI : UI
     void roomInfoOnClickEvent(int nRoomListIndex)
     {
         if (nRoomListIndex >= m_roomInfoList.Count) return;
+        openShowRoomInfoUI(m_roomInfoList[nRoomListIndex].getRoomInfo());
+        m_bIgnoreChat = true;
+    }
+
+    public void openShowRoomInfoUI(S_RoomInfo roomInfo)
+    {
         ((showRoomInfoUI)m_uiList[(int)INDEX_MAINMENU_UI.SHOW_ROOM_INFO_UI]).setRoomInfo(
-            m_roomInfoList[nRoomListIndex].getRoomInfo(),
+            roomInfo,
             deleteRoomSlot, alreadyStartRoomSlot);
         openUI((int)INDEX_MAINMENU_UI.SHOW_ROOM_INFO_UI);
-        m_bIgnoreChat = true;
     }
 
     public void openSelectGameUI()
@@ -349,8 +364,10 @@ public class mainMenuUI : UI
     /// </summary>
     void startLoadingData()
     {
+        ((loadingUI)m_uiList[(int)INDEX_MAINMENU_UI.LOADING_DATA_UI]).setUserInfoZoneFunc(setUserInfoZone);
         openUI((int)INDEX_MAINMENU_UI.LOADING_DATA_UI);
     }
+
 
     /// <summary>
     /// 로딩이 끝나면 불릴 함수

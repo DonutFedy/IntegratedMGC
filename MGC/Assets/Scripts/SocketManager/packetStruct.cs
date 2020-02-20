@@ -71,6 +71,7 @@ namespace PACKET
     {
         public UInt32 m_gpID;
         public string m_nickName;
+        public string m_channelName;
     }
 
     #endregion
@@ -82,6 +83,7 @@ namespace PACKET
     public struct S_FriendInfo
     {
         public string       m_nickName;
+        public bool         m_bIsOnLine;
     }
 
 

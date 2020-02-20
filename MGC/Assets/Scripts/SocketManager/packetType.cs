@@ -140,6 +140,8 @@ namespace PACKET
         packetTypeSocialFriendListRequest, //친구 리스트
         packetTypeSocialFriendListResponse,
 
+        packetTypeSocialInviteGameRoom,
+
         packetTypeSocialCount,
     }
 

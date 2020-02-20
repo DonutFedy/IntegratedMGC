@@ -316,7 +316,8 @@ public class friendUI : UI
             for (int i = 0; i < curData.m_size; ++i)                                     // 일단, 임시로 5명의 친구를 추가
             {
                 S_FriendInfo newInfo = new S_FriendInfo();            // info 객체 생성
-                newInfo.m_nickName = curData.m_friends[i];
+                newInfo.m_nickName = curData.m_friends[i].m_nickName;
+                newInfo.m_bIsOnLine = curData.m_friends[i].m_bIsOnLine;
                 makeFriendSlot(newInfo);                                // 객체 생성
             }
             // recttransform resizing

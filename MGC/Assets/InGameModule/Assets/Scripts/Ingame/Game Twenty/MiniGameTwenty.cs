@@ -581,7 +581,7 @@ public class MiniGameTwenty : MiniGame
         //2// 패킷 보내고 ChatBox 숨김
         byte[] packet = Serializer.StructureToByte(m_sendChallengeAnswerPacket);
 
-        IngameManager.m_Instance.GetClient().SendPacket(packet);
+        GameManager.m_Instance.makePacket(packet);
         HideChatBox();
         //2//
     }
@@ -597,7 +597,7 @@ public class MiniGameTwenty : MiniGame
         //2// 패킷 보내고 ChatBox 숨김
         byte[] packet = Serializer.StructureToByte(m_sendQuestionPacket);
 
-        IngameManager.m_Instance.GetClient().SendPacket(packet);
+        GameManager.m_Instance.makePacket(packet);
         HideChatBox();
         //2//
     }
@@ -978,7 +978,7 @@ public class MiniGameTwenty : MiniGame
         //1// yes 패킷 보내고 yes, no button 숨김
         byte[] packet = Serializer.StructureToByte(m_sendYesOrNoPacket);
 
-        IngameManager.m_Instance.GetClient().SendPacket(packet);
+        GameManager.m_Instance.makePacket(packet);
         HideYesAndNoButton();
         //1//
     }
@@ -992,7 +992,7 @@ public class MiniGameTwenty : MiniGame
         //1// no 패킷 보내고 yes, no button 숨김
         byte[] packet = Serializer.StructureToByte(m_sendYesOrNoPacket);
 
-        IngameManager.m_Instance.GetClient().SendPacket(packet);
+        GameManager.m_Instance.makePacket(packet);
         HideYesAndNoButton();
         //1//
     }
@@ -1182,7 +1182,7 @@ public class MiniGameTwenty : MiniGame
         
         //3// 준비완료 패킷 전송
         byte[] packet = IngameManager.m_Instance.GetSendGameReadyPacket();
-        IngameManager.m_Instance.GetClient().SendPacket(packet);
+        GameManager.m_Instance.makePacket(packet);
         //3//
     }
 
@@ -1258,7 +1258,7 @@ public class MiniGameTwenty : MiniGame
 
             byte[] packet = Serializer.StructureToByte(m_sendReserveExitOrCancelPacket);
 
-            IngameManager.m_Instance.GetClient().SendPacket(packet);
+            GameManager.m_Instance.makePacket(packet);
 
             m_goReserveExitOrCancel.SetActive(false);
             m_textReserveExitOrCancel.text = "나가기 예약";
@@ -1273,7 +1273,7 @@ public class MiniGameTwenty : MiniGame
             
             byte[] packet = Serializer.StructureToByte(m_sendReserveExitOrCancelPacket);
 
-            IngameManager.m_Instance.GetClient().SendPacket(packet);
+            GameManager.m_Instance.makePacket(packet);
 
             m_goReserveExitOrCancel.SetActive(false);
             m_textReserveExitOrCancel.text = "나가기 취소";

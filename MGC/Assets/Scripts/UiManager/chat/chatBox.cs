@@ -106,7 +106,7 @@ public class chatBox : MonoBehaviour
     /// </summary>
     public void checkIF()
     {
-        Debug.Log("??");
+        //Debug.Log("??");
         m_bNowWhisper = checkWhisper(m_chatIF.text) | checkGuild(m_chatIF.text);
     }
 

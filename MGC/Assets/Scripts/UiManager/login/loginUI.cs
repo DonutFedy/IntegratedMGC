@@ -1,6 +1,6 @@
-﻿#define DEBUGMODE
+﻿//#define NOTLOGINSERVER
+#define DEBUGMODE
 
-#define NOTLOGINSERVER
 
 using System;
 using System.Collections;

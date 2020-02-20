@@ -29,7 +29,8 @@ public class loadingUI : UI
 
     Coroutine           m_loadingCoroutine;
 
-
+    public delegate void userInfoZoneFUNC(string nickname, string cannelName);
+    userInfoZoneFUNC    m_setUserFunc;
 
     public override void initUI(UI manager, int uiType)
     {
@@ -60,6 +61,11 @@ public class loadingUI : UI
         // 초기화
         m_loadingCoroutine = StartCoroutine(loadingData());
         m_bWaiting = false;
+    }
+    public void setUserInfoZoneFunc(userInfoZoneFUNC func)
+    {
+        m_setUserFunc = null;
+        m_setUserFunc = func;
     }
 
     protected override void startWaiting(responseListener listener)
@@ -110,7 +116,6 @@ public class loadingUI : UI
             }
             yield return null;
         }
-
         exitUI(1);
     }
 
@@ -123,6 +128,8 @@ public class loadingUI : UI
         C_PreLoadPacketLoadPlayerInfo curData = (C_PreLoadPacketLoadPlayerInfo)data;
 
         GameManager.m_Instance.setUserData(curData);
+        if (m_setUserFunc != null)
+            m_setUserFunc(curData.m_playerName,GameManager.m_Instance.getChannelName());
         // 일단은 1개만 받으면 되니 완료 시킴
         m_fCurLoadingState = 1;
     }

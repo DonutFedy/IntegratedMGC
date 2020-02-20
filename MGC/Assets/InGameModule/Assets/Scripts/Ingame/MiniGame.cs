@@ -58,7 +58,7 @@ public class MiniGame : MonoBehaviour
 
         byte[] packet = Serializer.StructureToByte(examinerSelectedAnswer);
 
-        IngameManager.m_Instance.GetClient().SendPacket(packet);
+        GameManager.m_Instance.makePacket(packet);
 
         Debug.Log("Send Answer Packet");
     }

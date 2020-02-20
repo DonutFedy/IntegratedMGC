@@ -28,7 +28,9 @@ namespace PACKET
         /// </summary>
         /// <param name="buf"></param>
         public abstract void deserialize(C_Buffer buf);
-        
+
+
+        public abstract int getSubType();
     }
     
 
@@ -43,6 +45,10 @@ namespace PACKET
         {
             m_basicType = BasePacketType.basePacketTypeLogin;
             m_loginType = type;
+        }
+        public override int getSubType()
+        {
+            return (int)m_loginType;
         }
     }
 
@@ -331,6 +337,10 @@ namespace PACKET
             m_basicType = BasePacketType.basePacketTypePreLoad;
             m_preLoadType = type;
         }
+        public override int getSubType()
+        {
+            return (int)m_preLoadType;
+        }
     }
 
     public class C_PreLoadPacketLoadPlayerInfo : C_BasePreLoadPacket
@@ -373,6 +383,10 @@ namespace PACKET
         {
             m_basicType = BasePacketType.basePacketTypeRoom;
             m_roomType = type;
+        }
+        public override int getSubType()
+        {
+            return (int)m_roomType;
         }
     }
 
@@ -757,6 +771,10 @@ namespace PACKET
             m_basicType = BasePacketType.basePacketTypeSocial;
             m_socialType = type;
         }
+        public override int getSubType()
+        {
+            return (int)m_socialType;
+        }
     }
 
     public class C_SocialPacketChatNormalRequest : C_BaseSocialPacket {
@@ -1075,7 +1093,7 @@ namespace PACKET
     public class C_SocialPacketFriendListResponse : C_BaseSocialPacket
     {
         public Int16            m_size;
-        public List<string>     m_friends = new List<string>();
+        public List<S_FriendInfo>     m_friends = new List<S_FriendInfo>();
         public C_SocialPacketFriendListResponse()
         {
             setType(SocialPacketType.packetTypeSocialFriendListResponse);
@@ -1085,11 +1103,12 @@ namespace PACKET
         {
             buf.get(ref m_size);
 
-            string curName = "";
             for(int i = 0; i < m_size; ++i)
             {
-                buf.get(ref curName);
-                m_friends.Add(curName);
+                S_FriendInfo newInfo = new S_FriendInfo();
+                buf.get(ref newInfo.m_nickName);
+                buf.get(ref newInfo.m_bIsOnLine);
+                m_friends.Add(newInfo);
             }
         }
 
@@ -1099,8 +1118,11 @@ namespace PACKET
             buf.set((byte)m_basicType);
             buf.set((byte)m_socialType);
             buf.set(m_size);
-            foreach (string friendName in m_friends)
-                buf.set(friendName);
+            foreach (S_FriendInfo friendName in m_friends)
+            {
+                buf.set(friendName.m_nickName);
+                buf.set(friendName.m_bIsOnLine);
+            }
             return buf;
         }
     }
@@ -1127,6 +1149,10 @@ namespace PACKET
         {
             m_type = type;
         }
+        public override int getSubType()
+        {
+            return 0;
+        }
     }
 
 
@@ -1151,6 +1177,10 @@ namespace PACKET
             buf.set((byte)m_basicType);
             buf.set(m_gameData);
             return buf;
+        }
+        public override int getSubType()
+        {
+            return 0;
         }
     }
 

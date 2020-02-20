@@ -386,7 +386,7 @@ public class MiniGameCatch : MiniGame
 
         byte[] packet = Serializer.StructureToByte(m_sendChatPacket);
 
-        IngameManager.m_Instance.GetClient().SendPacket(packet);
+        GameManager.m_Instance.makePacket(packet);
 
         m_ifChatBox.text = "";
         m_textChatBoxText.text = "";

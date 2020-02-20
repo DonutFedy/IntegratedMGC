@@ -88,14 +88,14 @@ public abstract class UI : MonoBehaviour
     /// 리스트의 UI를 열게된다.
     /// </summary>
     /// <param name="targetUiType"></param>
-    public void openUI(int targetUiType)
+    public void openUI(int targetUiType, bool bPopup = false)
     {
 
         m_bisFocuse = false;
 
-        // cur ui close
-        if (m_uiIndexStack.Count > 0)
+        if(bPopup == false && m_uiIndexStack.Count > 0)
         {
+            // cur ui close
             // check exist
             if (m_uiIndexStack.Peek() == targetUiType)
                 return;

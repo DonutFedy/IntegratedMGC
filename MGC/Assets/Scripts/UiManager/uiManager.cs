@@ -37,11 +37,6 @@ public class uiManager : management
         m_uiController.openUI((int)INDEX_OUTGAME_UI.LOGIN);
     }
 
-    public void onErrorClient(string errorMSG)
-    {
-        UI curUI = ((controllerUI)m_uiController).getLoginUI();
-        ((loginUI)curUI).onErrorClient(errorMSG);
-    }
     public override void release()
     {
         m_uiController.releaseUI();
@@ -54,5 +49,33 @@ public class uiManager : management
     {
         m_uiController.inputKey(type);
     }
+
+    #region OUT UI
+
+    /// <summary>
+    /// 에러 상황에서 에러 메세지를 표현하기 위한 함수
+    /// </summary>
+    /// <param name="errorMSG"></param>
+    public void onErrorClient(string errorMSG)
+    {
+        UI curUI = ((controllerUI)m_uiController).getLoginUI();
+        ((loginUI)curUI).onErrorClient(errorMSG);
+    }
+
+    /// <summary>
+    /// 채널 변경(게임 서버변경)에 따른 UI작업
+    /// </summary>
+    public void goLobbyUI(object roomInfo)
+    {
+        ((controllerUI)m_uiController).goLobbyUI(roomInfo);
+    }
+
+
+    public void testFunc()
+    {
+        ((controllerUI)m_uiController).openInviteInfoUI();
+    }
+
+    #endregion
 
 }

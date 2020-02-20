@@ -48,5 +48,8 @@ public abstract class management : MonoBehaviour {
     {
         m_eventBuffer.Enqueue(packet);
     }
-
+    public void clearEvent()
+    {
+        m_eventBuffer.Clear();
+    }
 }

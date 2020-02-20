@@ -307,6 +307,22 @@ public class GameManager : MonoBehaviour {
         m_socketMGR.disconnect_mainServer();
         setConnectStateMainServer(false, false);
     }
+    public void changeMainServer(string changeIp, int changePort, string changedChannelName, object roomInfo)
+    {
+        if( m_main_serverIP == changeIp && m_nMain_PortNUM == changePort) // 같은 채널이면 로비변경 및 기존 로직
+        {
+            goLobbyUI(roomInfo);
+            return;
+        }
+        disconnect_mainServer();
+        setMainServerInfo(changeIp, changePort);
+        if(connect_mainServer())
+        {
+            setChannelName(changedChannelName);
+            goLobbyUI(roomInfo);
+        }
+    }
+
     public bool isConnectedLoginServer()
     {
         return m_bConnectedLoginServer;
@@ -385,6 +401,7 @@ public class GameManager : MonoBehaviour {
     {
         C_InGamePacket packet = new C_InGamePacket();
         packet.m_gameData = buf;
+        packet.m_bResponse = false;
         m_socketMGR.enqueueEvent(packet);
     }
 
@@ -413,6 +430,11 @@ public class GameManager : MonoBehaviour {
         return m_fGameTime;
     }
 
+    public string getChannelName()
+    {
+        return m_userData.m_channelName;
+    }
+
     /// <summary>
     /// 로그인 서버에서 로그인 완료시 계정 정보를 세팅
     /// </summary>
@@ -429,6 +451,10 @@ public class GameManager : MonoBehaviour {
     public void setUserData(C_PreLoadPacketLoadPlayerInfo data)
     {
         m_userData.m_nickName = data.m_playerName;
+    }
+    public void setChannelName(string channelName)
+    {
+        m_userData.m_channelName = channelName;
     }
     public void setUserGuildData(bool bExistGuild, object guildInfo)
     {
@@ -489,7 +515,6 @@ public class GameManager : MonoBehaviour {
 
     #endregion
 
-
     #region In GAME / UI
 
     public void startGame()
@@ -511,6 +536,7 @@ public class GameManager : MonoBehaviour {
     void openOutGameUI()
     {
         m_bNowInGame = false;
+        m_uiMGR.clearEvent();
         m_inGameOBJ.SetActive(false);
         m_outUIOBJ.SetActive(true);
     }
@@ -518,6 +544,7 @@ public class GameManager : MonoBehaviour {
     void openInGameManager()
     {
         m_bNowInGame = true;
+        m_uiMGR.clearEvent();
         m_inGameOBJ.SetActive(true);
         m_outUIOBJ.SetActive(false);
     }
@@ -525,10 +552,24 @@ public class GameManager : MonoBehaviour {
 
     #endregion
 
+    #region OUT UI
 
+    
+
+
+    /// <summary>
+    /// 현재 모든 UI를 닫고 로비 UI로 넘어간다.
+    /// </summary>
+    void goLobbyUI( object roomInfo)
+    {
+        m_uiMGR.goLobbyUI(roomInfo);
+    }
+
+    #endregion
 
     public void DEBUG(string msg)
     {
         m_TestText.text += msg+'\n';
     }
+
 }

@@ -42,10 +42,11 @@ public class gameRoomUI : UI
     int                     m_clientUserSlotIndex;
     bool                    m_bNeedInfo;
 
-    public enum INDEX_OF_GAMEROOM_UI
+    public enum INDEX_OF_GAMEROOM_UI :int
     {
         FAIL_START = 0,
         RESULT_UI,
+        INVITE_UI,
     }
 
     #region BASIC UI
@@ -325,6 +326,16 @@ public class gameRoomUI : UI
 
     }
 
+
+
+    #endregion
+
+
+    #region UI OPEN/CLOSE
+    public void openInviteListUI()
+    {
+        openUI((int)INDEX_OF_GAMEROOM_UI.INVITE_UI);
+    }
 
 
     #endregion

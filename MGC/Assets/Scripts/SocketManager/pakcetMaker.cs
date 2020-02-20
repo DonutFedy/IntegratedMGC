@@ -153,7 +153,7 @@ namespace PACKET
                 ++m_index;
                 ++m_length;
             }
-            m_buf[m_index] = (byte)'\n';
+            //m_buf[m_index] = (byte)'\n';
             ++m_index;
             ++m_length;
             return this;

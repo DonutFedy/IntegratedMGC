@@ -1,4 +1,5 @@
-﻿#define DEBUGMODE
+﻿//#define DEFUALTMAINSERVER
+#define DEBUGMODE
 
 using PACKET;
 using PROTOCOL;
@@ -133,11 +134,16 @@ public class selectChannelUI : UI
         {
             try
             {
-                //GameManager.m_Instance.setMainServerInfo("10.255.252.83", 10000);
+#if DEFUALTMAINSERVER
 
+#else
+                GameManager.m_Instance.setMainServerInfo(curData.m_ip, curData.m_port);
+#endif
                 if (GameManager.m_Instance.connect_mainServer())
                 {
                     GameManager.m_Instance.disconnect_loginServer();
+
+                    GameManager.m_Instance.setChannelName(m_ChannelList[m_nSelectChannelIndex].getChannelName());
                     // openMainMenu
                     m_uiManager.closeUI(1);
                     ((loginUI)m_uiManager).openMainMenuUI();
