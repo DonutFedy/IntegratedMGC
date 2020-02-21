@@ -116,16 +116,16 @@ public class loadingUI : UI
             }
             yield return null;
         }
+
+        GameManager.m_Instance.setReconnectCount(0);
         exitUI(1);
     }
 
     void recvLoadingData(C_BasePacket eventData)
     {
-        C_BasePreLoadPacket data = (C_BasePreLoadPacket)eventData;
+        if (eventData.getSubType() != (int)ConnectionPacketType.preLoadPlayerInfo) return;
 
-        if (data.m_preLoadType != PreLoadType.preLoadPlayerInfo) return;
-
-        C_PreLoadPacketLoadPlayerInfo curData = (C_PreLoadPacketLoadPlayerInfo)data;
+        C_ConnectionPacketLoadPlayerInfo curData = (C_ConnectionPacketLoadPlayerInfo)eventData;
 
         GameManager.m_Instance.setUserData(curData);
         if (m_setUserFunc != null)

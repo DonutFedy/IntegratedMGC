@@ -243,8 +243,11 @@ public class client
                 {
                     // event Enqueue
                     C_BasePacket eventData = pakcetMaker.makePacket(new C_Buffer(buffer, nBytes));
-                    if(eventData != null)
+                    if (eventData != null)
+                    {
                         m_handler_mainServer(eventData);
+                        Debug.Log("Client Event Type :: " + eventData.m_basicType.ToString());
+                    }
                 }
                 else
                 {

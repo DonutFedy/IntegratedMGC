@@ -47,11 +47,17 @@ namespace PACKET
         loginPacketTypeSize,
     };
 
-    public enum PreLoadType : byte
+    public enum ConnectionPacketType : byte
     {
         packetTypeNone = 0,
 
         preLoadPlayerInfo,
+
+        connectionRequest,
+        connectionResponse,
+
+        InviteTransferRequest,
+        InviteTransferResponse,
 
         packetTypeCount,
     }
@@ -108,7 +114,7 @@ namespace PACKET
         errorTypeStartGameNotHaveGame,
         errorTypeStartGameAlreadyStartGame,
         errorTypeStartGameRoomIsNotWaitingGame,
-
+        errorTypeStartGameNotEnoughPlayer,
         errorTypeStartGameCount,
     }
 

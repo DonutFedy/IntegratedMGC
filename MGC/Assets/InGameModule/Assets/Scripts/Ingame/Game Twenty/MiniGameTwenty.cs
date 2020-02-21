@@ -141,6 +141,7 @@ public class MiniGameTwenty : MiniGame
 
     public void Event(byte[] _baBuffer, GameData.EnumGameTwentyStructType _eStructType)
     {
+        Debug.Log("MGT Event :: "+_baBuffer);
         switch (_eStructType)
         {
             case GameData.EnumGameTwentyStructType.RECEIVE_POPUP_TIME_START_PACKET:

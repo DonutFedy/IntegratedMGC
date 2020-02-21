@@ -420,16 +420,19 @@ namespace PACKET
         }
 
 
-        static C_BasePreLoadPacket makePreLoadPacket(C_Buffer buf)
+        static C_BaseConnectionPacket makePreLoadPacket(C_Buffer buf)
         {
-            C_BasePreLoadPacket packet = null;
+            C_BaseConnectionPacket packet = null;
 
             byte type = 0;
             buf.get(ref type);
-            switch ((PreLoadType)type)
+            switch ((ConnectionPacketType)type)
             {
-                case PreLoadType.preLoadPlayerInfo:
-                    packet = new C_PreLoadPacketLoadPlayerInfo();
+                case ConnectionPacketType.preLoadPlayerInfo:
+                    packet = new C_ConnectionPacketLoadPlayerInfo();
+                    break;
+                case ConnectionPacketType.InviteTransferResponse:
+                    packet = new C_ConnectionPacketInviteTransferResponse();
                     break;
             }
 

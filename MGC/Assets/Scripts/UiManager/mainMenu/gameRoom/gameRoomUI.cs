@@ -41,7 +41,7 @@ public class gameRoomUI : UI
     int                     m_nRoomLimit;
     int                     m_clientUserSlotIndex;
     bool                    m_bNeedInfo;
-
+    bool                    m_bStartGame;
     public enum INDEX_OF_GAMEROOM_UI :int
     {
         FAIL_START = 0,
@@ -86,11 +86,18 @@ public class gameRoomUI : UI
     public override void releaseUI()
     {
         // 중단
+        if(m_bStartGame == false)
+        {
+            Debug.Log("방 나가기");
+            C_RoomPacketLeaveRoomRequest data = new C_RoomPacketLeaveRoomRequest();
+            GameManager.m_Instance.makePacket(data);
+        }
     }
 
     protected override void setUI()
     {
         // 초기화
+        m_bStartGame = false;
         m_chatBox.setChatBox();
     }
 
@@ -196,9 +203,7 @@ public class gameRoomUI : UI
 
     public void exitUI()
     {
-        startWaiting(responseExitGameroom);
-        C_RoomPacketLeaveRoomRequest data = new C_RoomPacketLeaveRoomRequest();
-        GameManager.m_Instance.makePacket(data);
+        m_uiManager.closeUI(1);
     }
 
     void responseExitGameroom(C_BasePacket eventData)
@@ -320,6 +325,7 @@ public class gameRoomUI : UI
 
         if(curData.m_bIsSuccess)
         {
+            m_bStartGame = curData.m_bIsSuccess;
             // 게임 시작 준비
             // 2. 현재 ui 닫기
             m_uiManager.closeUI(1);
@@ -329,7 +335,28 @@ public class gameRoomUI : UI
         else if(m_userInfoList[m_clientUserSlotIndex-1].isMaster())
         {
             // 오류 메세지 출력
-            ((ResultUI)m_uiList[(int)INDEX_OF_GAMEROOM_UI.RESULT_UI]).setResultMSG("게임을 시작할 수 없습니다.");
+            string errorMSG = "게임을 시작할 수 없습니다.";
+
+            switch (curData.m_errorCode)
+            {
+                case ErrorTypeStartGame.errorTypeStartGameReady:
+                    errorMSG = "준비하지 않은 플레이어가 있습니다."; 
+                    break;
+                case ErrorTypeStartGame.errorTypeStartGameNotHaveGame:
+                    errorMSG = "게임이 선택되지 않았습니다.\n다시 방을 만들어 주세요.";
+                    break;
+                case ErrorTypeStartGame.errorTypeStartGameAlreadyStartGame:
+                case ErrorTypeStartGame.errorTypeStartGameRoomIsNotWaitingGame:
+                    errorMSG = "게임이 이미 시작된 방입니다.";
+                    break;
+                case ErrorTypeStartGame.errorTypeStartGameNotEnoughPlayer:
+                    errorMSG = "플레이어가 부족합니다.";
+                    break;
+                case ErrorTypeStartGame.errorTypeStartGameCount:
+                    break;
+            }
+
+            ((ResultUI)m_uiList[(int)INDEX_OF_GAMEROOM_UI.RESULT_UI]).setResultMSG(errorMSG);
             openUI((int)INDEX_OF_GAMEROOM_UI.RESULT_UI);
         }
 

@@ -101,7 +101,6 @@ public class selectChannelUI : UI
         }
         m_ChannelSlotParent.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, m_default_sizeX);
         m_ChannelSlotParent.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, m_offset_sizeY*m_ChannelList.Count+20);
-
     }
 
     void selectChannel(int nChannelIndex)

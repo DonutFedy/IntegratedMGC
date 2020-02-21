@@ -81,7 +81,9 @@ public class showRoomInfoUI : UI
         m_roomNameText.text = m_roomInfo.m_roomName;
         m_modeText.text = myApi.GetDescription(m_roomInfo.m_roomGameType);
         if(m_roomInfo.m_playerCount == 0)
-        m_manCountText.text = m_roomInfo.m_playerCount + "/" + m_roomInfo.m_maxPlayerCount; ;
+            m_manCountText.text =  "?? /" + m_roomInfo.m_maxPlayerCount;
+        else
+            m_manCountText.text = m_roomInfo.m_playerCount + "/" + m_roomInfo.m_maxPlayerCount;
 
         m_pwInputField.interactable = m_roomInfo.m_password;   // 공개시 비밀번호 IF 비활성화
 

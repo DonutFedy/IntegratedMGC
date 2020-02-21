@@ -102,6 +102,7 @@ public class IngameManager : MonoBehaviour
 
     public void Event(byte[] _baBuffer)
     {
+        Debug.Log("IngameMGR Event :: " + _baBuffer);
         //1// 첫 1바이트를 이용해 game type 판별
         int iGameTypeStartIdx = 0;
         //GameData.EnumGameType eGameType = (GameData.EnumGameType)CheckPacketType(_baBuffer, iGameTypeStartIdx);

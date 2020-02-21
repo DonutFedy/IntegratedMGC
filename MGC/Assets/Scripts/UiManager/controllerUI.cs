@@ -1,4 +1,4 @@
-﻿//#define NOTLOGINSERVER
+﻿#define NOTLOGINSERVER
 #define IGNORLOGIN
 
 using PACKET;
@@ -41,12 +41,21 @@ public class controllerUI : UI
 #if NOTLOGINSERVER
                 return;
 #endif
+                Debug.Log("???");
                 m_waitReconnectUI.SetActive(true);
                 //m_uiList[m_uiIndexStack.Peek()].stopWaitingUI();
                 m_uiList[m_uiIndexStack.Peek()].releaseUI();
                 m_uiList[m_uiIndexStack.Peek()].closeUI(1);
                 break;
             case AnomalyType.mainServer_Reconnect:
+                C_ConnectionPacketConnectServerRequest curConnectData = new C_ConnectionPacketConnectServerRequest();
+
+#if NOTLOGINSERVER
+                curConnectData.m_nToken = -1;
+#else
+                curConnectData.m_nToken = GameManager.m_Instance.getToken();
+#endif
+                GameManager.m_Instance.makePacket(curConnectData);
                 break;
             case AnomalyType.mainServer_Disconnect:
                 while (m_uiIndexStack.Count > 1)
@@ -57,7 +66,16 @@ public class controllerUI : UI
                 m_uiList[m_uiIndexStack.Peek()].releaseUI();
                 UI curUI = getLoginUI();
                 ((loginUI)curUI).onErrorClient("게임 서버에 접속 할 수 없습니다.");
-                GameManager.m_Instance.connect_loginServer();
+
+                if(GameManager.m_Instance.getReconnectCount()>0)
+                {
+                    GameManager.m_Instance.connect_mainServer();
+                }
+                else
+                {
+                    GameManager.m_Instance.connect_loginServer();
+                    GameManager.m_Instance.endGame();
+                }
                 break;
         }
     }

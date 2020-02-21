@@ -81,6 +81,7 @@ namespace PACKET
     {
         public bool         m_bFlag;
         public string       m_nickname;
+        public Int64        m_token;
         public C_LoginResponsePacket()
         {
             setType(LoginPacketType.loginPacketTypeLoginResponse);
@@ -92,6 +93,7 @@ namespace PACKET
             if( m_bFlag)
             {
                 buf.get(ref m_nickname);
+                buf.get(ref m_token);
             }
         }
 
@@ -104,6 +106,7 @@ namespace PACKET
             if(m_bFlag)
             {
                 buf.set(m_nickname);
+                buf.set(m_token);
             }
             return buf;
         }
@@ -327,15 +330,15 @@ namespace PACKET
 
     #endregion
 
-    #region PRELOAD
+    #region BaseConnectionPacket
 
 
-    public abstract class C_BasePreLoadPacket : C_BasePacket
+    public abstract class C_BaseConnectionPacket : C_BasePacket
     {
-        public PreLoadType m_preLoadType;
+        public ConnectionPacketType m_preLoadType;
 
 
-        protected void setType(PreLoadType type)
+        protected void setType(ConnectionPacketType type)
         {
             m_basicType = BasePacketType.basePacketTypePreLoad;
             m_preLoadType = type;
@@ -346,12 +349,12 @@ namespace PACKET
         }
     }
 
-    public class C_PreLoadPacketLoadPlayerInfo : C_BasePreLoadPacket
+    public class C_ConnectionPacketLoadPlayerInfo : C_BaseConnectionPacket
     {
         public string           m_playerName;
-        public C_PreLoadPacketLoadPlayerInfo()
+        public C_ConnectionPacketLoadPlayerInfo()
         {
-            setType(PreLoadType.preLoadPlayerInfo);
+            setType(ConnectionPacketType.preLoadPlayerInfo);
             m_bResponse = true;
         }
         public override void deserialize(C_Buffer buf)
@@ -368,6 +371,83 @@ namespace PACKET
             return buf;
         }
     }
+
+    public class C_ConnectionPacketConnectServerRequest : C_BaseConnectionPacket
+    {
+        public Int64            m_nToken;
+        public C_ConnectionPacketConnectServerRequest()
+        {
+            setType(ConnectionPacketType.connectionRequest);
+            m_bResponse = false;
+        }
+        public override void deserialize(C_Buffer buf)
+        {
+            buf.get(ref m_nToken);
+        }
+
+        public override C_Buffer serialize()
+        {
+            C_Buffer buf = new C_Buffer();
+            buf.set((byte)m_basicType);
+            buf.set((byte)m_preLoadType);
+            buf.set(m_nToken);
+            return buf;
+        }
+    }
+
+    public class C_ConnectionPacketInviteTransferRequest : C_BaseConnectionPacket
+    {
+        public string           m_ip;
+        public int              m_nPortNUM;
+        public Int64            m_nToken;
+        public C_ConnectionPacketInviteTransferRequest()
+        {
+            setType(ConnectionPacketType.InviteTransferRequest);
+            m_bResponse = false;
+        }
+        public override void deserialize(C_Buffer buf)
+        {
+            buf.get(ref m_ip);
+            buf.get(ref m_nPortNUM);
+            buf.get(ref m_nToken);
+        }
+
+        public override C_Buffer serialize()
+        {
+            C_Buffer buf = new C_Buffer();
+            buf.set((byte)m_basicType);
+            buf.set((byte)m_preLoadType);
+            buf.set(m_ip);
+            buf.set(m_nPortNUM);
+            buf.set(m_nToken);
+            return buf;
+        }
+    }
+
+
+    public class C_ConnectionPacketInviteTransferResponse : C_BaseConnectionPacket
+    {
+        public C_ConnectionPacketInviteTransferResponse()
+        {
+            setType(ConnectionPacketType.InviteTransferResponse);
+            m_bResponse = true;
+        }
+        public override void deserialize(C_Buffer buf)
+        {
+        }
+
+        public override C_Buffer serialize()
+        {
+            C_Buffer buf = new C_Buffer();
+            buf.set((byte)m_basicType);
+            buf.set((byte)m_preLoadType);
+            return buf;
+        }
+    }
+
+
+
+
 
     #endregion
 

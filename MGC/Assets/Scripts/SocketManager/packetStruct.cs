@@ -17,6 +17,7 @@ namespace PACKET
     {
         public string       m_accessID;
         public string       m_accessPW;
+        public Int64        m_clientToken;
     }
 
     public struct S_Channel

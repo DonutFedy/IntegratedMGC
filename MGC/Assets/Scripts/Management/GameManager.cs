@@ -77,6 +77,7 @@ public class GameManager : MonoBehaviour {
     bool m_bLogin;
     S_UserData              m_userData;
     S_UserAccessData        m_accessData;
+    int                     m_nReconnectCount;
     #endregion
 
     // Use this for initialization
@@ -158,6 +159,8 @@ public class GameManager : MonoBehaviour {
             m_resourceMGR.init();
         if (m_inputKeyMGR)
             m_inputKeyMGR.init();
+
+        openOutGameUI();
         try
         {
             if (m_socketMGR)
@@ -170,7 +173,6 @@ public class GameManager : MonoBehaviour {
         {
             writeErrorLog(ex.Message);
         }
-        openOutGameUI();
 
         m_bInit = true;
     }
@@ -293,6 +295,7 @@ public class GameManager : MonoBehaviour {
     public bool connect_mainServer()
     {
         if (m_bConnectedMainServer) return false;
+        countDownReconnectCount();
         setConnectStateMainServer(m_socketMGR.connect_mainServer(m_main_serverIP, m_nMain_PortNUM), true);
         return m_bConnectedMainServer;
     }
@@ -348,9 +351,11 @@ public class GameManager : MonoBehaviour {
             else
             {
                 // wait connect ui open
+                Debug.Log("???");
                 anomalyType = AnomalyType.loginServer_Disconnect;
                 setLoginState(false);
             }
+            Debug.Log("???222");
             data.setType(anomalyType);
             makeUiEvent(data);
         }
@@ -371,8 +376,6 @@ public class GameManager : MonoBehaviour {
             else
             {
                 // wait connect ui open
-                if(m_bNowInGame)
-                    openOutGameUI();
                 anomalyType = AnomalyType.mainServer_Disconnect;
                 setLoginState(false);
             }
@@ -434,7 +437,15 @@ public class GameManager : MonoBehaviour {
     {
         return m_userData.m_channelName;
     }
-
+    public int getReconnectCount()
+    {
+        return m_nReconnectCount;
+    }
+    public Int64 getToken()
+    {
+        return m_accessData.m_clientToken;
+    }
+    
     /// <summary>
     /// 로그인 서버에서 로그인 완료시 계정 정보를 세팅
     /// </summary>
@@ -443,12 +454,13 @@ public class GameManager : MonoBehaviour {
     {
         m_accessData = accessData;
         setLoginState(true);
+        setReconnectCount(3);
     }
     /// <summary>
     /// 게임 서버에 접속 후, 로딩 시에 받은 데이터로 유저 데이터를 세팅
     /// </summary>
     /// <param name="data"></param>
-    public void setUserData(C_PreLoadPacketLoadPlayerInfo data)
+    public void setUserData(C_ConnectionPacketLoadPlayerInfo data)
     {
         m_userData.m_nickName = data.m_playerName;
     }
@@ -498,6 +510,20 @@ public class GameManager : MonoBehaviour {
     {
         return m_bLogin;
     }
+
+    public void setReconnectCount(int nCount)
+    {
+        m_nReconnectCount = nCount;
+    }
+
+    /// <summary>
+    /// 게임 서버에 접속 실패시, 카운팅
+    /// </summary>
+    void countDownReconnectCount()
+    {
+        --m_nReconnectCount;
+    }
+
     #endregion
 
     #region RESOURCE
@@ -526,7 +552,8 @@ public class GameManager : MonoBehaviour {
 
     public void endGame()
     {
-        openOutGameUI();
+        if(m_bNowInGame)
+            openOutGameUI();
     }
 
     /// <summary>
@@ -536,7 +563,6 @@ public class GameManager : MonoBehaviour {
     void openOutGameUI()
     {
         m_bNowInGame = false;
-        m_uiMGR.clearEvent();
         m_inGameOBJ.SetActive(false);
         m_outUIOBJ.SetActive(true);
     }
@@ -544,7 +570,7 @@ public class GameManager : MonoBehaviour {
     void openInGameManager()
     {
         m_bNowInGame = true;
-        m_uiMGR.clearEvent();
+        m_ingameMGR.clearEvent();
         m_inGameOBJ.SetActive(true);
         m_outUIOBJ.SetActive(false);
     }
